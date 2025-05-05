@@ -15,7 +15,7 @@ export default class JoinGame {
     if (!game) throw new Error('GAME_NOT_FOUND');
     const player = await this.playerRepository.findById(playerId);
     if (!player) throw new Error('PLAYER_NOT_FOUND');
-    game.addPlayer(playerId);
+    game.addPlayerParticipation(playerId);
     return await this.gameRepository.update(game);
   }
 }

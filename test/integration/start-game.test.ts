@@ -10,8 +10,8 @@ describe('Iniciar Partida', function () {
 
   it('Deve iniciar uma partida', async function () {
     const prevGame = new Game(gameProps);
-    prevGame.addPlayer('1');
-    prevGame.addPlayer('2');
+    prevGame.addPlayerParticipation('1');
+    prevGame.addPlayerParticipation('2');
     const gameRepository = new GameRepositoryMemory([prevGame]);
     const startGame = new StartGame(gameRepository);
     const game = await startGame.execute('1');

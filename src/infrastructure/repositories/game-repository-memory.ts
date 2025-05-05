@@ -1,24 +1,17 @@
-import Game, {GameStatus} from "@/domain/entities/game";
+import Game from "@/domain/entities/game";
 import GameRepository from "@/domain/repositories/game-repository";
 
+import gameProps from "@test/shared/game-data";
+
 export default class GameRepositoryMemory implements GameRepository {
-  private readonly GAME_DATA = {
-    id : "adsfa",
-    status : GameStatus.SCHEDULED,
-    fieldId : "123",
-    fpsLimit : 400,
-    gameMode : "MilSim",
-    startDate : new Date(Date.now() + 1000 * 60 * 60 * 12),
-    playerLimit : 10,
-    description : undefined,
-    friendlyFire : false,
-    minHonorLevel : 0,
-    specificRules : undefined,
-  };
   private readonly gameList: Game[];
 
   constructor(games?: Game[]) {
     this.gameList = this.populate(games);
+  }
+
+  async search(input: {playerId: string; date: Date;}): Promise<Game[]> {
+    return this.gameList.filter(p => p.playerList.includes(input.playerId) && p.startDate === input.date);
   };
 
   async findById(gameId: string): Promise<Game | null> {
@@ -40,7 +33,7 @@ export default class GameRepositoryMemory implements GameRepository {
     return games
         ? [...games]
         : new Array(10).fill(null).map((_, index) =>
-            new Game({...this.GAME_DATA, id : index.toString()})
+            new Game({...gameProps, id : index.toString()})
         );
   };
 

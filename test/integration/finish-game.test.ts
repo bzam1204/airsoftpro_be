@@ -3,6 +3,7 @@ import FinishGame from "@/application/use-cases/finish-game";
 import Game, {GameStatus} from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
+
 import gameProps from "@test/shared/game-data";
 
 describe("Finalizar Partida", function () {

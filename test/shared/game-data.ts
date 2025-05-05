@@ -3,7 +3,7 @@ import {GameStatus} from "@/domain/entities/game";
 const gameProps = {
   specificRules : undefined,
   minHonorLevel : 0,
-  playerLimit : 10,
+  playersLimit : 10,
   friendlyFire : false,
   description : undefined,
   startDate : new Date(Date.now() + 1000 * 60 * 60 * 12),

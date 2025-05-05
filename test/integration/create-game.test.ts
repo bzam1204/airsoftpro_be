@@ -2,20 +2,10 @@ import CreateGame from "@/application/use-cases/create-game";
 
 import Game from "@/domain/entities/game";
 
-import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
+import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
-const gameProps = {
-  specificRules : '',
-  minHonorLevel : 0,
-  friendlyFire : true,
-  playersLimit : 10,
-  description : '',
-  startDate : new Date(Date.now() + 1000 + 60),
-  fpsLimit : 400,
-  gameMode : 'MilSim',
-  fieldId : '1',
-};
+import gameProps from "@test/shared/game-data";
 
 describe("Criar Partida", function () {
   it("Deve criar uma partida", async function () {

@@ -3,7 +3,7 @@ import GameRules from "@/domain/entities/game-rules";
 export default class Game {
   private readonly description?: string;
   private readonly _playerList: string[];
-  private readonly startDate: Date;
+  private readonly _startDate: Date;
   private readonly gameRules: GameRules = new GameRules({});
   private readonly gameMode: string;
   private readonly fieldId: string;
@@ -24,7 +24,7 @@ export default class Game {
     if (this.isValidStartDate(startDate)) throw new Error('INVALID_START_DATE');
     this.description = description;
     this._playerList = playerList;
-    this.startDate = startDate;
+    this._startDate = startDate;
     this.gameMode = gameMode;
     this.fieldId = fieldId;
     this._status = status;
@@ -33,15 +33,19 @@ export default class Game {
     if (gameRules) this.gameRules = gameRules;
   };
 
-  get playerList(): string[] {
+  get startDate() {
+    return this._startDate;
+  };
+
+  get playerList() {
     return this._playerList;
   };
 
-  get status(): GameStatus {
+  get status() {
     return this._status;
   };
 
-  get id(): string {
+  get id() {
     return this._id;
   };
 
@@ -52,7 +56,7 @@ export default class Game {
     return void 0;
   };
 
-  addPlayer(playerId: string): void {
+  addPlayerParticipation(playerId: string): void {
     if (this._status !== GameStatus.SCHEDULED) throw new Error('GAME_NOT_IN_SCHEDULED_STATUS')
     if (this._playerList.includes(playerId)) throw new Error('PLAYER_ALREADY_IN_GAME');
     if (this._playerList.length === this.gameRules.playersLimit) throw new Error('GAME_FULL');
