@@ -15,6 +15,12 @@ describe('Cancelar Partida', function () {
     expect(game.status).toBe(GameStatus.CANCELLED);
   });
 
+  it('Não deve cancelar uma partida inexistente', async function () {
+    const gameRepository = new GameRepositoryMemory([]);
+    const cancelGame = new CancelGame(gameRepository);
+    await expect(cancelGame.execute('1')).rejects.toThrow("GAME_NOT_FOUND");
+  });
+
   it('Não deve cancelar uma partida cancelada', async function () {
     const gameRepository = new GameRepositoryMemory([new Game({...gameProps, status : GameStatus.CANCELLED})]);
     const cancelGame = new CancelGame(gameRepository);

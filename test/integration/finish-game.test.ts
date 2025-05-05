@@ -15,10 +15,16 @@ describe("Finalizar Partida", function () {
     expect(game.status).toBe(GameStatus.COMPLETED);
   });
 
+  it('Não deve finalizar uma partida inexistente', async function () {
+    const gameRepository = new GameRepositoryMemory([]);
+    const finishGame = new FinishGame(gameRepository);
+    await expect(finishGame.execute('1')).rejects.toThrow('GAME_NOT_FOUND');
+  });
+
   it.each(Object.values(GameStatus).filter(p => p !== GameStatus.IN_PROGRESS))('Não deve finalizar uma partida que não esteja em andamento', async function (status) {
     const gameRepository = new GameRepositoryMemory([new Game({...gameProps, status})]);
     const finishGame = new FinishGame(gameRepository);
-    await expect(finishGame.execute('1')).rejects.toThrow('GAME_NOT_IN_PROGRESS')
+    await expect(finishGame.execute('1')).rejects.toThrow('GAME_NOT_IN_PROGRESS');
   });
 
 });
