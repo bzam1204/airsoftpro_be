@@ -22,7 +22,7 @@ const PLAYER_DATA = {
   id : '1',
 }
 
-describe("Leave Game", function () {
+describe("Cancelar Participação", function () {
   it("Deve remover um jogador de uma partida agendada", async function () {
     const [gameId, playerId] = ["1", "1"];
     const gameRepository = new GameRepositoryMemory([new Game({...GAME_DATA, id : '1', playerList : ['1']})]);

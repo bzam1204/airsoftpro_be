@@ -66,13 +66,13 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 * Entrada: ID da partida
 * Ação: remover jogador da lista de participantes
 
-### UC11 - Criar Partida 🧠
+### UC11 - Criar Partida ✅
 
 * Perfil: administrador
 * Entradas: dados completos da partida
 * Regras: apenas em campos que o administrador possui
 
-### UC12 - Editar Partida
+### UC12 - Editar Partida🧠
 
 * Perfil: administrador
 * Entrada: dados atualizados

@@ -3,7 +3,7 @@ import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
-describe("View Game", function () {
+describe("Ver uma Partida", function () {
   it("Deve retornar os dados de uma partida", async function () {
     const gameRepository = new GameRepositoryMemory();
     const viewGame = new ViewGame(gameRepository);

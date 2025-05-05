@@ -22,7 +22,7 @@ const PLAYER_DATA = {
   id : '1',
 }
 
-describe("Join Game", function () {
+describe("Entrar na Partida", function () {
 
   it("Deve inscrever um jogador em uma partida", async function () {
     const [gameId, playerId] = ["1", "1"];

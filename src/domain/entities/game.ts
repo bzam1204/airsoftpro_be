@@ -33,9 +33,9 @@ export default class Game {
     if (gameRules) this.gameRules = gameRules;
   };
 
-  private isValidStartDate(date: Date) {
-    return date < new Date();
-  }
+  get playerList(): string[] {
+    return this._playerList;
+  };
 
   get status(): GameStatus {
     return this._status;
@@ -43,10 +43,6 @@ export default class Game {
 
   get id(): string {
     return this._id;
-  };
-
-  get playerList(): string[] {
-    return this._playerList;
   };
 
   start(): void {
@@ -86,6 +82,10 @@ export default class Game {
     throw new Error('INVALID_STATUS_TO_CANCEL');
   };
 
+  private isValidStartDate(date: Date) {
+    return date < new Date();
+  };
+
 };
 
 interface Props {
@@ -97,11 +97,11 @@ interface Props {
   fieldId: string;
   status?: GameStatus;
   id: string;
-};
+}
 
 export enum GameStatus {
   SCHEDULED = "SCHEDULED",
   IN_PROGRESS = "IN_PROGRESS",
   COMPLETED = "COMPLETED",
   CANCELLED = "CANCELLED",
-};
+}
