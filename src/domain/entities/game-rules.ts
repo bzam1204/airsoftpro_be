@@ -15,10 +15,6 @@ export default class GameRules {
     this._fpsLimit = fpsLimit;
   };
 
-  get fpsLimit() {
-    return this._fpsLimit;
-  };
-
   get playersLimit() {
     return this._playersLimit;
   };

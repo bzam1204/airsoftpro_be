@@ -5,15 +5,7 @@ import GameRepository from "@/domain/repositories/game-repository";
 import Player from "@/domain/entities/player";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
-
-const GAME_DATA = {
-  description : undefined,
-  startDate : new Date(Date.now() + 1000 * 60 * 60 * 12),
-  gameMode : "MilSim",
-  fieldId : "123",
-  status : GameStatus.SCHEDULED,
-  id : "1",
-};
+import gameProps from "@test/shared/game-data";
 
 const PLAYER_DATA = {
   motto : 'undefined ;)',
@@ -25,7 +17,7 @@ const PLAYER_DATA = {
 describe("Cancelar Participação", function () {
   it("Deve remover um jogador de uma partida agendada", async function () {
     const [gameId, playerId] = ["1", "1"];
-    const gameRepository = new GameRepositoryMemory([new Game({...GAME_DATA, id : '1', playerList : ['1']})]);
+    const gameRepository = new GameRepositoryMemory([new Game({...gameProps, id : '1', playerList : ['1']})]);
     const playerRepositoryStub = {findById : () => Promise.resolve(new Player(PLAYER_DATA))}
     const cancelParticipation = new CancelParticipation(gameRepository, playerRepositoryStub);
     const game = await cancelParticipation.execute(gameId, playerId);
@@ -33,7 +25,7 @@ describe("Cancelar Participação", function () {
   });
 
   it("Não deve remover um jogador que não esteja na partida", async function () {
-    const gameRepository = new GameRepositoryMemory([new Game({...GAME_DATA, id : '1', playerList : []})]);
+    const gameRepository = new GameRepositoryMemory([new Game({...gameProps, id : '1', playerList : []})]);
     const playerRepositoryStub = {findById : () => Promise.resolve(new Player(PLAYER_DATA))}
     const cancelParticipation = new CancelParticipation(gameRepository, playerRepositoryStub);
     await expect(cancelParticipation.execute('1', '1')).rejects.toThrow("PLAYER_NOT_IN_GAME")
@@ -47,14 +39,14 @@ describe("Cancelar Participação", function () {
   });
 
   it("Não deve remover um jogador inexistente de um partida", async function () {
-    const gameRepository = new GameRepositoryMemory([new Game({...GAME_DATA, id : '1'})]);
+    const gameRepository = new GameRepositoryMemory([new Game({...gameProps, id : '1'})]);
     const playerRepositoryStub = {findById : () => Promise.resolve(null)};
     const cancelParticipation = new CancelParticipation(gameRepository, playerRepositoryStub);
     await expect(cancelParticipation.execute('1', '1')).rejects.toThrow("PLAYER_NOT_FOUND");
   });
 
   it.each(Object.values(GameStatus).filter(p => p !== GameStatus.SCHEDULED))("Não deve remover um jogador em uma partida com status diferente de SCHEDULED", async function (status) {
-    const gameRepository = new GameRepositoryMemory([new Game({...GAME_DATA, id : '1', status, playerList : ['1']})]);
+    const gameRepository = new GameRepositoryMemory([new Game({...gameProps, id : '1', status, playerList : ['1']})]);
     const playerRepositoryStub = {findById : () => Promise.resolve(new Player(PLAYER_DATA))}
     const cancelParticipation = new CancelParticipation(gameRepository, playerRepositoryStub);
     await expect(cancelParticipation.execute("1", "1")).rejects.toThrow('GAME_NOT_IN_SCHEDULED_STATUS');

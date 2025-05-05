@@ -6,9 +6,10 @@ module.exports = {
   }, 
   modulePaths: [ "<rootDir>" ],
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/../src/$1",
-    "^@test/(.*)$": "<rootDir>/$1"
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@test/(.*)$": "<rootDir>/test/$1"
   }, 
-  rootDir: "test",
-  moduleFileExtensions: ["js", "ts"]
+  rootDir: ".",
+  collectCoverage: true,
+  moduleFileExtensions: ["js", "ts"],
 };

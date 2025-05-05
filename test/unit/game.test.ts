@@ -1,21 +1,9 @@
 import Game, {GameStatus} from "@/domain/entities/game";
 import GameRules from "@/domain/entities/game-rules";
 
-describe('Partida', function () {
+import gameData from "@test/shared/game-data";
 
-  const gameData = {
-    specificRules : undefined,
-    minHonorLevel : 0,
-    playerLimit : 10,
-    friendlyFire : false,
-    description : undefined,
-    startDate : new Date(Date.now() + 1000 * 60 * 60 * 12),
-    gameMode : "MilSim",
-    fpsLimit : 400,
-    fieldId : "123",
-    status : GameStatus.SCHEDULED,
-    id : "adsfa",
-  };
+describe('Partida', function () {
 
   describe('Criar', function () {
 
