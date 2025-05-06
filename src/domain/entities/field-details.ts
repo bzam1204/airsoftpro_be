@@ -40,32 +40,26 @@ export default class FieldDetails {
   };
 
   changeInfrastructure(infrastructure: string) {
-    if (this._infrastructure === infrastructure) throw new Error('INFRAS_ARE_THE_SAME');
     this._infrastructure = infrastructure;
   };
 
   changeDescription(description: string) {
-    if (this._description === description) throw new Error('DESCRIPTIONS_ARE_THE_SAME');
     this._description = description;
   };
 
   changeCoordinates(coordinates: string) {
-    if (this._coordinates === coordinates) throw new Error('COORDINATES_ARE_THE_SAME');
     this._coordinates = coordinates;
   };
 
   changeAddress(address: string) {
-    if (this._address === address) throw new Error('ADDRESS_ARE_THE_SAME');
     this._address = address;
   };
 
   changePhotos(photos: string[]) {
-    if (this._photos === photos) throw new Error('PHOTOS_ARE_THE_SAME');
     this._photos = photos;
   };
 
   changeRules(rules: string) {
-    if (this._rules === rules) throw new Error('RULES_ARE_THE_SAME');
     this._rules = rules;
   };
 

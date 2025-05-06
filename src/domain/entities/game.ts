@@ -1,11 +1,11 @@
-import GameRules from "@/domain/entities/game-rules";
 import GameStatus from "@/domain/enums/game-status";
+import GameRules from "@/domain/entities/game-rules";
 
 export default class Game {
   private readonly description?: string;
   private readonly _playerList: string[];
   private readonly _startDate: Date;
-  private readonly gameRules: GameRules = new GameRules({});
+  private readonly gameRules: GameRules;
   private readonly gameMode: string;
   private readonly fieldId: string;
   private readonly _id: string;
@@ -15,7 +15,7 @@ export default class Game {
       {
         description = '',
         playerList = [],
-        gameRules,
+        gameRules = new GameRules({}),
         startDate,
         gameMode,
         fieldId,
@@ -26,12 +26,11 @@ export default class Game {
     this.description = description;
     this._playerList = playerList;
     this._startDate = startDate;
+    this.gameRules = gameRules;
     this.gameMode = gameMode;
     this.fieldId = fieldId;
     this._status = status;
     this._id = id;
-    if (playerList) this._playerList = playerList;
-    if (gameRules) this.gameRules = gameRules;
   };
 
   get startDate() {
@@ -58,7 +57,7 @@ export default class Game {
   };
 
   addPlayerParticipation(playerId: string): void {
-    if (this._status !== GameStatus.SCHEDULED) throw new Error('GAME_NOT_IN_SCHEDULED_STATUS')
+    if (this._status !== GameStatus.SCHEDULED) throw new Error('GAME_NOT_IN_SCHEDULED_STATUS');
     if (this._playerList.includes(playerId)) throw new Error('PLAYER_ALREADY_IN_GAME');
     if (this._playerList.length === this.gameRules.playersLimit) throw new Error('GAME_FULL');
     this._playerList.push(playerId);
@@ -103,4 +102,3 @@ interface Props {
   status?: GameStatus;
   id: string;
 }
-

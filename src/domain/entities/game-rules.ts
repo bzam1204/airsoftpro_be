@@ -18,6 +18,7 @@ export default class GameRules {
   get playersLimit() {
     return this._playersLimit;
   };
+
 };
 
 interface Props {

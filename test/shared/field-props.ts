@@ -7,7 +7,6 @@ const fieldProps = {
     address : '',
     photos : [],
     rules : '',
-
   }),
   gamesList : [],
   adminId : '1',

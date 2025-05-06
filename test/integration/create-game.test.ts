@@ -13,7 +13,6 @@ describe("Criar Partida", function () {
     const fieldRepository = new FieldRepositoryMemory();
     const gameRepository = new GameRepositoryMemory([]);
     const createGame = new CreateGame(idGeneratorStub, gameRepository, fieldRepository);
-
     const game = await createGame.execute(gameProps);
     expect(game).toBeInstanceOf(Game);
   });
@@ -54,7 +53,7 @@ describe("Criar Partida", function () {
   it("Não deve criar uma partida com campo inexistente", async function () {
     const gameRepository = new GameRepositoryMemory([]);
     const idGeneratorStub = {generate : () => '1'};
-    const fieldRepositoryStub = {findById : () => Promise.resolve(null)};
+    const fieldRepositoryStub = new FieldRepositoryMemory([]);
     const createGame = new CreateGame(idGeneratorStub, gameRepository, fieldRepositoryStub);
     await expect(createGame.execute({
       ...gameProps,

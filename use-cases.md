@@ -40,7 +40,7 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 
 ---
 
-## 🎮 Gestão de Partidas
+## 🎮 Gestão de Partidas ✅
 
 ### UC7 - Visualizar Lista de Partidas ✅
 
@@ -72,30 +72,30 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 * Entradas: dados completos da partida
 * Regras: apenas em campos que o administrador possui
 
-### UC12 - Editar Partida🧠
+### UC12 - Editar Partida ✅
 
 * Perfil: administrador
 * Entrada: dados atualizados
-* Validação: somente partidas futuras
+* Validação: somente partidas futuras 
 
-### UC13 - Cancelar Partida
+### UC13 - Cancelar Partida ✅
 
 * Perfil: administrador
 * Entrada: ID da partida
 
 ---
 
-## 🏞 Gestão de Campos
+## 🏞 Gestão de Campos 
 
-### UC14 - Cadastrar Campo
+### UC14 - Cadastrar Campo ✅
 
 * Perfil: administrador
 * Entradas: nome, endereço, coordenadas, fotos, infraestrutura, regras
 
-### UC15 - Editar Campo
+### UC15 - Editar Campo   ✅
 
-* Perfil: administrador
-* Entrada: dados atualizados
+* Perfil: administrador  ✅
+* Entrada: dados atualizados  ✅
 * Regra: somente em campos que administra
 
 ### UC16 - Visualizar Campos
@@ -107,17 +107,17 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 
 ## 🚨 Sistema de Denúncias e Honra
 
-### UC17 - Criar Denúncia
+### UC17 - Criar Denúncia ✅
 
 * Pré-condições:
 
-    * Jogador denunciante e denunciado participaram da mesma partida
-    * Partida já começou
-    * Apenas uma denúncia por jogador por partida
-* Entrada: ID da partida, ID do jogador denunciado, motivo
-* Saída: denúncia registrada
+* Jogador denunciante e denunciado participaram da mesma partida ✅
+* Partida já começou ✅
+* Apenas uma denúncia por jogador por partida ✅
+* Entrada: ID da partida, ID do jogador denunciado, motivo ✅
+* Saída: denúncia registrada ✅
 
-### UC18 - Visualizar Histórico de Denúncias Feitas
+### UC18 - Visualizar Histórico de Denúncias Feitas 
 
 * Entrada: ID do jogador
 * Saída: lista de denúncias feitas
@@ -127,23 +127,23 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 * Entrada: ID do jogador
 * Saída: lista de denúncias recebidas
 
-### UC20 - Avaliar Denúncia (Automático)
+### UC20 - Avaliar Denúncia (Automático) ✅
 
 * Entrada: nova denúncia registrada
 * Ação: algoritmo considera:
 
-    * Reputação e frequência de denúncias do denunciante
-    * Padrão de denúncias recebidas pelo denunciado
-    * Tempo de cadastro dos envolvidos
-* Saída: cálculo de impacto no nível de honra
+    * Reputação e frequência de denúncias do denunciante ✅
+    * Padrão de denúncias recebidas pelo denunciado ✅
+    * Tempo de cadastro dos envolvidos ✅
+* Saída: cálculo de impacto no nível de honra ✅
 
-### UC21 - Atualizar Nível de Honra
+### UC21 - Atualizar Nível de Honra ✅
 
-* Entrada: resultado da avaliação
+* Entrada: resultado da avaliação ✅
 * Regras:
 
     * Redução proporcional à gravidade
-    * Máximo de 1 estrela por denúncia
+    * Máximo de 1 estrela por denúncia ✅
     * Recuperação possível por bom comportamento
 
 ---

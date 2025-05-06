@@ -9,7 +9,7 @@ const gameProps = {
   startDate : new Date(Date.now() + 1000 * 60 * 60 * 12),
   gameMode : "MilSim",
   fpsLimit : 400,
-  fieldId : "123",
+  fieldId : "1",
   status : GameStatus.SCHEDULED,
   id : "1",
 };
