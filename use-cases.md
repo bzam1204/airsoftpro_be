@@ -85,7 +85,7 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 
 ---
 
-## 🏞 Gestão de Campos 
+## 🏞 Gestão de Campos ✅
 
 ### UC14 - Cadastrar Campo ✅
 
@@ -98,14 +98,14 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 * Entrada: dados atualizados  ✅
 * Regra: somente em campos que administra
 
-### UC16 - Visualizar Campos
+### UC16 - Visualizar Campos ✅
 
 * Entrada: nenhum ou filtros (ex: localização)
-* Saída: lista de campos disponíveis
+* Saída: lista de campos disponíveis 
 
 ---
 
-## 🚨 Sistema de Denúncias e Honra
+## 🚨 Sistema de Denúncias e Honra✅
 
 ### UC17 - Criar Denúncia ✅
 
@@ -117,12 +117,12 @@ Abaixo, os requisitos do MVP do **Airsoft Pro** foram reorganizados em **casos d
 * Entrada: ID da partida, ID do jogador denunciado, motivo ✅
 * Saída: denúncia registrada ✅
 
-### UC18 - Visualizar Histórico de Denúncias Feitas 
+### UC18 - Visualizar Histórico de Denúncias Feitas ✅
 
 * Entrada: ID do jogador
 * Saída: lista de denúncias feitas
-
-### UC19 - Visualizar Denúncias Recebidas
+  ✅
+### UC19 - Visualizar Denúncias Recebidas✅
 
 * Entrada: ID do jogador
 * Saída: lista de denúncias recebidas

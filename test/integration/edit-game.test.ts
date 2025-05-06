@@ -11,9 +11,16 @@ describe("Editar Partida", function () {
   it('Deve editar as informações de uma partida', async function () {
     const gameRepository = new GameRepositoryMemory([new Game(gameProps)]);
     const editGame = new EditGame(gameRepository);
-    const updateGame = new Game({...gameProps, })
+    const updateGame = new Game({...gameProps})
     const game = await editGame.execute(updateGame);
     expect(game).toEqual(updateGame);
   });
-  
-})
+
+  it('Deve editar as informações de uma partida', async function () {
+    const gameRepository = new GameRepositoryMemory([new Game(gameProps)]);
+    const editGame = new EditGame(gameRepository);
+    const updateGame = new Game({...gameProps, id : 'invalid_id'});
+    await expect(editGame.execute(updateGame)).rejects.toThrow('GAME_NOT_FOUND');
+  });
+
+});

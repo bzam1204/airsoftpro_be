@@ -84,6 +84,7 @@ describe('Criar Denúncia', function () {
     const reportRepository = new ReportRepositoryMemory(reportList);
     const playerRepository = new PlayerRepositoryMemory(playerList);
     const gameRepository = new GameRepositoryMemory(gameList);
+    const idGenerator = {generate : () => '11'} as IdGenerator;
     const createReport = new CreateReport(reportRepository, playerRepository, gameRepository, idGenerator);
     await createReport.execute({...reportProps});
     const recipientPlayer = await playerRepository.findById(reportProps.to);
