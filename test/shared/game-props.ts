@@ -1,4 +1,4 @@
-import {GameStatus} from "@/domain/entities/game";
+import GameStatus from "@/domain/enums/game-status";
 
 const gameProps = {
   specificRules : undefined,
@@ -14,4 +14,4 @@ const gameProps = {
   id : "1",
 };
 
-export default gameProps
+export default gameProps;

@@ -1,10 +1,11 @@
 import StartGame from "@/application/use-cases/start-game";
 
-import Game, {GameStatus} from "@/domain/entities/game";
+import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
-import gameProps from "@test/shared/game-data";
+import gameProps from "@test/shared/game-props";
+import GameStatus from "@/domain/enums/game-status";
 
 describe('Iniciar Partida', function () {
 
@@ -15,7 +16,7 @@ describe('Iniciar Partida', function () {
     const gameRepository = new GameRepositoryMemory([prevGame]);
     const startGame = new StartGame(gameRepository);
     const game = await startGame.execute('1');
-    expect(game.status).toBe(GameStatus.IN_PROGRESS);
+    expect(game.status).toBe(GameStatus.STARTED);
   });
 
   it('Não deve iniciar uma partida sem jogadores suficientes', async function () {

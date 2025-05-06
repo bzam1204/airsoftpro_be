@@ -5,7 +5,7 @@ import Game from "@/domain/entities/game";
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
-import gameProps from "@test/shared/game-data";
+import gameProps from "@test/shared/game-props";
 
 describe("Criar Partida", function () {
   it("Deve criar uma partida", async function () {
@@ -62,4 +62,4 @@ describe("Criar Partida", function () {
     })).rejects.toThrow("FIELD_NOT_FOUND");
   });
 
-})
+});

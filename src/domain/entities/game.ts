@@ -1,4 +1,5 @@
 import GameRules from "@/domain/entities/game-rules";
+import GameStatus from "@/domain/enums/game-status";
 
 export default class Game {
   private readonly description?: string;
@@ -52,7 +53,7 @@ export default class Game {
   start(): void {
     if (this._status !== GameStatus.SCHEDULED) throw new Error('GAME_NOT_IN_SCHEDULED_STATUS');
     if (this._playerList.length < 2) throw new Error('INSUFFICIENT_PLAYERS');
-    this._status = GameStatus.IN_PROGRESS;
+    this._status = GameStatus.STARTED;
     return void 0;
   };
 
@@ -71,15 +72,15 @@ export default class Game {
   };
 
   finish(): void {
-    if (this._status === GameStatus.IN_PROGRESS) {
-      this._status = GameStatus.COMPLETED;
+    if (this._status === GameStatus.STARTED) {
+      this._status = GameStatus.FINISHED;
       return void 0;
     }
     throw new Error('GAME_NOT_IN_PROGRESS');
   };
 
   cancel(): void {
-    if (this._status === GameStatus.SCHEDULED || this._status === GameStatus.IN_PROGRESS) {
+    if (this._status === GameStatus.SCHEDULED || this._status === GameStatus.STARTED) {
       this._status = GameStatus.CANCELLED;
       return void 0;
     }
@@ -103,9 +104,3 @@ interface Props {
   id: string;
 }
 
-export enum GameStatus {
-  SCHEDULED = "SCHEDULED",
-  IN_PROGRESS = "IN_PROGRESS",
-  COMPLETED = "COMPLETED",
-  CANCELLED = "CANCELLED",
-}

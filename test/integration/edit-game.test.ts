@@ -4,7 +4,7 @@ import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
-import gameProps from "@test/shared/game-data";
+import gameProps from "@test/shared/game-props";
 
 describe("Editar Partida", function () {
 

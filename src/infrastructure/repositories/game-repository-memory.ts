@@ -1,7 +1,7 @@
 import Game from "@/domain/entities/game";
 import GameRepository from "@/domain/repositories/game-repository";
 
-import gameProps from "@test/shared/game-data";
+import gameProps from "@test/shared/game-props";
 
 export default class GameRepositoryMemory implements GameRepository {
   private readonly gameList: Game[];
@@ -22,24 +22,21 @@ export default class GameRepositoryMemory implements GameRepository {
     return this.gameList;
   };
 
-  async update(data: Game): Promise<Game> {
-    const index = this.gameList.findIndex(p => p.id === data.id);
+  async update(game: Game): Promise<Game> {
+    const index = this.gameList.findIndex(p => p.id === game.id);
     if (index === -1) throw new Error("GAME_NOT_FOUND");
-    this.gameList[index] = data;
-    return data;
-  };
-
-  private populate(games?: Game[]) {
-    return games
-        ? [...games]
-        : new Array(10).fill(null).map((_, index) =>
-            new Game({...gameProps, id : index.toString()})
-        );
+    this.gameList[index] = game;
+    return game;
   };
 
   async create(game: Game): Promise<Game> {
     this.gameList.push(game);
     return game;
+  };
+
+  private populate(games?: Game[]) {
+    if (games) return games;
+    return new Array(10).fill(null).map((_, i) => new Game({...gameProps, id : `${++i}`}));
   };
 
 }
