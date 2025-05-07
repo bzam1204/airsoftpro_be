@@ -12,4 +12,4 @@ export default class StartGame {
     return await this.gameRepository.update(game);
   };
   
-}
+};

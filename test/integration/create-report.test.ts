@@ -1,7 +1,6 @@
 import CreateReport from "@/application/use-cases/create-report";
 
 import ReportMotivation from "@/domain/enums/report-motivation";
-import IdGenerator from "@/domain/services/id-generator";
 import GameStatus from "@/domain/enums/game-status";
 import Report from "@/domain/entities/report";
 import Player from "@/domain/entities/player";
@@ -15,6 +14,7 @@ import reportProps from "@test/unit/report-props";
 import playerProps from "@test/shared/player-props";
 import gameProps from "@test/shared/game-props";
 import PlayerRepository from "@/domain/repositories/player-repository";
+import IdGenerator from "@/application/services/id-generator";
 
 describe('Criar Denúncia', function () {
   const reportRepository = () => new ReportRepositoryMemory();

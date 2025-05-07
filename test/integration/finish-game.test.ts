@@ -1,11 +1,13 @@
 import FinishGame from "@/application/use-cases/finish-game";
 
+import GameStatus from "@/domain/enums/game-status";
 import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
+import sleep from "@/shared/utils/sleep";
+
 import gameProps from "@test/shared/game-props";
-import GameStatus from "@/domain/enums/game-status";
 
 describe("Finalizar Partida", function () {
 
@@ -26,6 +28,15 @@ describe("Finalizar Partida", function () {
     const gameRepository = new GameRepositoryMemory([new Game({...gameProps, status})]);
     const finishGame = new FinishGame(gameRepository);
     await expect(finishGame.execute('1')).rejects.toThrow('GAME_NOT_IN_PROGRESS');
+  });
+
+  it("Deve guardar a data ao finalizar uma partida", async function () {
+    const gameRepository = new GameRepositoryMemory([new Game({...gameProps, status : GameStatus.STARTED})]);
+    await sleep(1000);
+    const endGame = new FinishGame(gameRepository);
+    const game = await endGame.execute('1');
+    expect(game.finishDate).toBeDefined();
+    expect(game.finishDate!.getMilliseconds()).toBeGreaterThan(game.startDate.getMilliseconds());
   });
 
 });

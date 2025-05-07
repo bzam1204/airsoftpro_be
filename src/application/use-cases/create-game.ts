@@ -1,8 +1,8 @@
 import FieldRepository from "@/domain/repositories/field-repository";
 import GameRepository from "@/domain/repositories/game-repository";
-import IdGenerator from "@/domain/services/id-generator";
 import GameRules from "@/domain/entities/game-rules";
 import Game from "@/domain/entities/game";
+import IdGenerator from "@/application/services/id-generator";
 
 export default class CreateGame {
 

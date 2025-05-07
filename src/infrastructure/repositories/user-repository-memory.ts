@@ -13,6 +13,11 @@ export default class UserRepositoryMemory implements UserRepository {
     return user ? user : null;
   };
 
+  async findById(id: string): Promise<User | null> {
+    const user = this.users.find(p => p.id === id);
+    return user ? user : null;
+  };
+
   async create(user: User): Promise<User> {
     this.users.push(user);
     return user;

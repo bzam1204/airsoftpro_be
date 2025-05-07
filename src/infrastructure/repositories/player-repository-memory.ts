@@ -7,11 +7,26 @@ export default class PlayerRepositoryMemory implements PlayerRepository {
 
   constructor(players?: Player[]) {
     this.players = this.populate(players);
-  };
+  }
 
   async findById(playerId: string): Promise<Player | null> {
     const player = this.players.find(p => p.id === playerId);
     return player ? player : null;
+  };
+
+  async findByName(name: string): Promise<Player | null> {
+    const player = this.players.find(p => p.name === name);
+    return player ? player : null;
+  };
+  
+  async findByUserId(userId: string): Promise<Player | null> {
+    const player = this.players.find(p => p.userId === userId);
+    return player ? player : null;
+  };
+
+  async create(player: Player): Promise<Player> {
+    this.players.push(player);
+    return player;
   };
 
   async update(player: Player): Promise<Player> {

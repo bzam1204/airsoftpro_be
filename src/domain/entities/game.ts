@@ -4,6 +4,7 @@ import GameRules from "@/domain/entities/game-rules";
 export default class Game {
   private readonly description?: string;
   private readonly _playerList: string[];
+  private _finishDate?: Date;
   private readonly _startDate: Date;
   private readonly gameRules: GameRules;
   private readonly gameMode: string;
@@ -33,6 +34,10 @@ export default class Game {
     this._id = id;
   };
 
+  get finishDate() {
+    return this._finishDate;
+  };
+  
   get startDate() {
     return this._startDate;
   };
@@ -71,15 +76,18 @@ export default class Game {
   };
 
   finish(): void {
-    if (this._status === GameStatus.STARTED) {
-      this._status = GameStatus.FINISHED;
-      return void 0;
-    }
-    throw new Error('GAME_NOT_IN_PROGRESS');
+    if (!this.isGameStarted()) throw new Error('GAME_NOT_IN_PROGRESS');
+    this._status = GameStatus.FINISHED;
+    this._finishDate = new Date();
+    return void 0;
   };
 
+  private isGameStarted() {
+    return this._status === GameStatus.STARTED;
+  }
+
   cancel(): void {
-    if (this._status === GameStatus.SCHEDULED || this._status === GameStatus.STARTED) {
+    if (this._status === GameStatus.SCHEDULED || this.isGameStarted()) {
       this._status = GameStatus.CANCELLED;
       return void 0;
     }

@@ -11,5 +11,6 @@ export default class FinishGame {
     if (!game) throw new Error("GAME_NOT_FOUND");
     game.finish();
     return game;
-  }
-}
+  };
+  
+};

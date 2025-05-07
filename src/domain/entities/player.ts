@@ -1,17 +1,19 @@
 export default class Player {
   private _honorLevel: number;
   private _tolerance: number;
+  private readonly _userId: string;
   private readonly motto?: string;
-  private readonly name: string;
+  private readonly _name: string;
   private readonly _id: string;
 
-  constructor({honorLevel = 6, tolerance = 10, motto = '', name, id}: Props) {
+  constructor({honorLevel = 6, tolerance = 10, userId, motto = '', name, id}: Props) {
     if (honorLevel < 0) throw new Error('HONOR_CANNOT_BE_NEGATIVE');
     if (tolerance < 0) throw new Error('TOLERANCE_CANNOT_BE_NEGATIVE');
     this._honorLevel = honorLevel;
     this._tolerance = tolerance;
+    this._userId = userId;
     this.motto = motto;
-    this.name = name;
+    this._name = name;
     this._id = id;
   };
 
@@ -22,6 +24,14 @@ export default class Player {
   get tolerance() {
     return this._tolerance;
   };
+  
+  get userId() {
+    return this._userId;
+  };
+  
+  get name() {
+    return this._name;
+  }
 
   get id() {
     return this._id;
@@ -44,6 +54,7 @@ export default class Player {
 interface Props {
   honorLevel?: number;
   tolerance?: number;
+  userId: string;
   motto?: string;
   name: string;
   id: string;

@@ -1,8 +1,10 @@
-import Game from "@/domain/entities/game";
+import GameStatus from "@/domain/enums/game-status";
 import GameRules from "@/domain/entities/game-rules";
+import Game from "@/domain/entities/game";
+
+import sleep from "@/shared/utils/sleep";
 
 import gameProps from "@test/shared/game-props";
-import GameStatus from "@/domain/enums/game-status";
 
 describe('Partida', function () {
 
@@ -83,9 +85,9 @@ describe('Partida', function () {
 
   });
 
-  describe('Encerrar', function () {
+  describe('Finalizar', function () {
 
-    it("Deve encerrar uma partida", function () {
+    it("Deve finalizar uma partida", function () {
       const game = new Game(gameProps);
       game.addPlayerParticipation("1");
       game.addPlayerParticipation("2");
@@ -94,9 +96,19 @@ describe('Partida', function () {
       expect(game.status).toBe(GameStatus.FINISHED);
     });
 
-    it.each(Object.values(GameStatus).filter(p => p !== GameStatus.STARTED))("Não deve encerrar uma partida que não esteja em andamento", function (status) {
+    it.each(Object.values(GameStatus).filter(p => p !== GameStatus.STARTED))("Não deve finalizar uma partida que não esteja em andamento", function (status) {
       const game = new Game({...gameProps, status});
       expect(() => game.finish()).toThrow('GAME_NOT_IN_PROGRESS');
+    });
+
+    it("Deve guardar a data e hora ao finalizar uma partida", async function () {
+      const game = new Game(gameProps);
+      game.addPlayerParticipation("1");
+      game.addPlayerParticipation("2");
+      game.start();
+      await sleep(1000);
+      game.finish();
+      expect(game.finishDate).toBeDefined();
     });
 
   });
@@ -114,6 +126,6 @@ describe('Partida', function () {
       expect(() => game.cancel()).toThrow('INVALID_STATUS_TO_CANCEL');
     });
 
-  })
+  });
 
 });

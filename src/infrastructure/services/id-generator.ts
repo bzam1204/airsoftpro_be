@@ -1,6 +1,6 @@
 import {v4} from "uuid";
 
-import IdGenerator from "@/domain/services/id-generator";
+import IdGenerator from "@/application/services/id-generator";
 
 export default class UUIDGenerator implements IdGenerator {
 
