@@ -35,6 +35,10 @@ export default class PlayerRepositoryMemory implements PlayerRepository {
     this.players[index] = player;
     return player;
   };
+  
+  async count(): Promise<number> {
+    return this.players.length;
+  };
 
   private populate(players?: Player[]) {
     if (players) return players;

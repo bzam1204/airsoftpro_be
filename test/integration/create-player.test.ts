@@ -1,4 +1,3 @@
-import CreatePlayer from "@/domain/entities/create-player";
 import Player from "@/domain/entities/player";
 import User from "@/domain/entities/user";
 
@@ -6,6 +5,7 @@ import PlayerRepositoryMemory from "@/infrastructure/repositories/player-reposit
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 
 import userProps from "@test/shared/user-props";
+import CreatePlayer from "@/application/use-cases/create-player";
 
 describe('Criar Jogador', function () {
   const userRepository = new UserRepositoryMemory([new User({...userProps, id : '2',})]);

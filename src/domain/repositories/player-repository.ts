@@ -10,5 +10,7 @@ export default interface PlayerRepository {
   create(player: Player): Promise<Player>;
 
   update(player: Player): Promise<Player>;
+  
+  count(): Promise<number>;
 
 };

@@ -14,25 +14,26 @@ export default class CreateUser {
   ) {
   };
 
-  async execute(props: Props): Promise<User> {
-    if (await this.userAlreadyExists(props.name)) throw new Error('NAME_ALREADY_IN_USE');
+  async execute(input: Input): Promise<Output> {
+    if (await this.userAlreadyExists(input.email)) throw new Error('USER_ALREADY_EXISTS');
     const id = this.idGenerator.generate();
-    const password = await this.hashingService.hash(props.password, this.saltRounds);
-    const user = new User({...props, id, password});
+    const password = await this.hashingService.hash(input.password, this.saltRounds);
+    const user = new User({...input, id, password});
     return this.userRepository.create(user);
   };
 
-  private async userAlreadyExists(name: string) {
-    return !!await this.userRepository.findByName(name)
+  private async userAlreadyExists(email: string) {
+    return !!await this.userRepository.findByEmail(email)
   };
 
 };
 
-interface Props {
+interface Input {
   password: string;
   fullName: string;
   birth: Date;
   photo: string;
   email: string;
-  name: string;
 }
+
+type Output = User

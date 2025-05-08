@@ -1,20 +1,18 @@
 export default class User {
   private readonly _password: string;
-  private readonly fullName: string;
-  private readonly birth: Date;
-  private readonly photo: string;
-  private readonly email: string;
-  private readonly _name: string;
+  private readonly _fullName: string;
+  private readonly _birth: Date;
+  private readonly _photo: string;
+  private readonly _email: string;
   private readonly _id: string;
 
   constructor(props: Props) {
     if (!this.isValidBirth(props.birth)) throw new Error('INVALID_BIRTH');
     this._password = props.password;
-    this.fullName = props.fullName;
-    this.birth = props.birth;
-    this.photo = props.photo;
-    this.email = props.email;
-    this._name = props.name;
+    this._fullName = props.fullName;
+    this._birth = props.birth;
+    this._photo = props.photo;
+    this._email = props.email;
     this._id = props.id;
   };
 
@@ -22,14 +20,14 @@ export default class User {
     return this._password;
   };
 
-  get name() {
-    return this._name;
-  };
-  
+  get email() {
+    return this._email;
+  }
+
   get id() {
     return this._id;
   };
-  
+
   private isValidBirth(birth: Date, now: Date = new Date()) {
     return birth.getTime() < now.getTime();
   };
@@ -42,6 +40,5 @@ interface Props {
   birth: Date;
   email: string;
   photo: string;
-  name: string;
   id: string;
 }

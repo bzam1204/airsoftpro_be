@@ -1,7 +1,6 @@
-import IdGenerator from "@/application/services/id-generator";
-
 import PlayerRepository from "@/domain/repositories/player-repository";
 import UserRepository from "@/domain/repositories/user-repository";
+import IdGenerator from "@/application/services/id-generator";
 import Player from "@/domain/entities/player";
 
 export default class CreatePlayer {

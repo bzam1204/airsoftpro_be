@@ -17,15 +17,6 @@ describe('Criar Usuário', function () {
     expect(user).toBeInstanceOf(User);
   });
 
-  it('Não deve criar 2 usuários com o mesmo nome', async function () {
-    const userRepository = new UserRepositoryMemory();
-    const idGenerator = {generate: () => '1'};
-    const createUser = new CreateUser(userRepository,hashingService, idGenerator);
-    const props = {name: 'user', photo: '', email: '', password: '', fullName: 'user of system', birth: new Date()};
-    const user = await createUser.execute(props);
-    await expect(createUser.execute(props)).rejects.toThrow('NAME_ALREADY_IN_USE');
-  });
-
   it('Deve encriptar a senha do usuário', async function () {
     const userRepository = new UserRepositoryMemory();
     const idGenerator = {generate: () => '1'};

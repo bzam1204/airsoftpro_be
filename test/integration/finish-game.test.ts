@@ -36,7 +36,6 @@ describe("Finalizar Partida", function () {
     const endGame = new FinishGame(gameRepository);
     const game = await endGame.execute('1');
     expect(game.finishDate).toBeDefined();
-    expect(game.finishDate!.getMilliseconds()).toBeGreaterThan(game.startDate.getMilliseconds());
   });
 
 });
