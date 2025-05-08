@@ -21,7 +21,11 @@ describe('Registrar novo user', function () {
     const idGenerator = {generate : () => '1'};
     const createUser = new CreateUser(userRepository, hashingService, idGenerator);
     const createPlayer = new CreatePlayer(playerRepository, userRepository, idGenerator);
-    const tokenProviderStub = {signAccessToken : () => '123123', signRefreshToken : () => '321321'};
+    const tokenProviderStub = {
+      signAccessToken : () => '123123',
+      signRefreshToken : () => '321321',
+      validate : jest.fn()
+    };
     const verifyPlayerName = new VerifyPlayerName(playerRepository);
     const registerNewUser = new RegisterNewUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
     const props = {
@@ -48,7 +52,11 @@ describe('Registrar novo user', function () {
     const verifyPlayerName = new VerifyPlayerName(playerRepository);
     const createUser = new CreateUser(userRepository, hashingService, idGenerator);
     const createPlayer = new CreatePlayer(playerRepository, userRepository, idGenerator);
-    const tokenProviderStub = {signAccessToken : () => '123123', signRefreshToken : () => '321321'};
+    const tokenProviderStub = {
+      signAccessToken : () => '123123',
+      signRefreshToken : () => '321321',
+      validate : jest.fn()
+    };
     const registerNewUser = new RegisterNewUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
     const props = {
       playerName : 'player1',
@@ -66,7 +74,11 @@ describe('Registrar novo user', function () {
     const hashingService = new HashingServiceBcryptjs();
     const userRepository = new UserRepositoryMemory([]);
     const idGenerator = {generate : () => '1'};
-    const tokenProviderStub = {signAccessToken : () => '123123', signRefreshToken : () => '321321'};
+    const tokenProviderStub = {
+      signAccessToken : () => '123123',
+      signRefreshToken : () => '321321',
+      validate : jest.fn()
+    };
     const verifyPlayerName = new VerifyPlayerName(playerRepository);
     const createPlayer = new CreatePlayer(playerRepository, userRepository, idGenerator);
     const createUser = new CreateUser(userRepository, hashingService, idGenerator);
