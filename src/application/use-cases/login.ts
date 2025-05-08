@@ -1,9 +1,8 @@
-import HashingService from "@/application/services/hashing-service";
-import TokenProvider from "@/application/services/token-provider";
-
 import FieldAdminRepository from "@/domain/repositories/field-admin-repository";
 import PlayerRepository from "@/domain/repositories/player-repository";
 import UserRepository from "@/domain/repositories/user-repository";
+import HashingService from "@/application/services/hashing-service";
+import TokenProvider from "@/application/services/token-provider";
 
 export default class Login {
 

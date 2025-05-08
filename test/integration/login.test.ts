@@ -1,4 +1,3 @@
-import Login from "@/domain/entities/login";
 import User from "@/domain/entities/user";
 
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
@@ -6,6 +5,7 @@ import PlayerRepositoryMemory from "@/infrastructure/repositories/player-reposit
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 
 import userProps from "@test/shared/user-props";
+import Login from "@/application/use-cases/login";
 
 describe('Entrar', function () {
 
@@ -17,7 +17,8 @@ describe('Entrar', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn()
+      validate : jest.fn(),
+      decode : jest.fn(),
     };
     const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingServiceStub, tokenProviderStub);
     const credentials = {email : 'user@example.com', password : '123123'};
@@ -34,7 +35,8 @@ describe('Entrar', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn()
+      validate : jest.fn(),
+      decode : jest.fn(),
     };
     const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingServiceStub, tokenProviderStub);
     const credentials = {email : 'user@example.com', password : '123123'};
@@ -49,7 +51,8 @@ describe('Entrar', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn()
+      validate : jest.fn(),
+      decode : jest.fn(),
     };
     const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingServiceStub, tokenProviderStub);
     const credentials = {email : 'wrong_email', password : '123123'};
