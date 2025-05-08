@@ -1,4 +1,4 @@
-import RefreshToken, {Payload} from "@/application/use-cases/refresh-token";
+import RefreshToken from "@/application/use-cases/refresh-token";
 import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
 
