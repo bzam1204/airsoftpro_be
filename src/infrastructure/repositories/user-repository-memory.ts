@@ -9,9 +9,9 @@ export default class UserRepositoryMemory implements UserRepository {
   };
 
   async findByEmail(email: string): Promise<User | null> {
-    const user = this.users.find(p => p.email);
+    const user = this.users.find(p => p.email === email);
     return user ? user : null;
-  }
+  };
 
   async findById(id: string): Promise<User | null> {
     const user = this.users.find(p => p.id === id);

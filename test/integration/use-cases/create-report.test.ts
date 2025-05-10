@@ -13,7 +13,6 @@ import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-
 import reportProps from "@test/unit/report-props";
 import playerProps from "@test/shared/player-props";
 import gameProps from "@test/shared/game-props";
-import PlayerRepository from "@/domain/repositories/player-repository";
 import IdGenerator from "@/application/services/id-generator";
 
 describe('Criar Denúncia', function () {

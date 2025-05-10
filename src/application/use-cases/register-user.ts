@@ -1,12 +1,12 @@
+import VerifyPlayerName from "@/application/use-cases/verify-player-name";
 import TokenProvider from "@/application/services/token-provider";
 import CreatePlayer from "@/application/use-cases/create-player";
 import CreateUser from "@/application/use-cases/create-user";
 
 import Player from "@/domain/entities/player";
 import User from "@/domain/entities/user";
-import VerifyPlayerName from "@/application/use-cases/verify-player-name";
 
-export default class RegisterNewUser {
+export default class RegisterUser {
 
   constructor(
       private readonly verifyPlayerName: VerifyPlayerName,

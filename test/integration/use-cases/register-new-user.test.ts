@@ -1,5 +1,5 @@
 import VerifyPlayerName from "@/application/use-cases/verify-player-name";
-import RegisterNewUser from "@/application/use-cases/register-new-user";
+import RegisterUser from "@/application/use-cases/register-user";
 import CreatePlayer from "@/application/use-cases/create-player";
 import CreateUser from "@/application/use-cases/create-user";
 
@@ -28,7 +28,7 @@ describe('Registrar novo user', function () {
       decode : jest.fn(),
     };
     const verifyPlayerName = new VerifyPlayerName(playerRepository);
-    const registerNewUser = new RegisterNewUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
+    const registerNewUser = new RegisterUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
     const props = {
       playerName : 'player1',
       password : '123123',
@@ -59,7 +59,7 @@ describe('Registrar novo user', function () {
       validate : jest.fn(),
       decode : jest.fn(),
     };
-    const registerNewUser = new RegisterNewUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
+    const registerNewUser = new RegisterUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
     const props = {
       playerName : 'player1',
       password : '123123',
@@ -85,7 +85,7 @@ describe('Registrar novo user', function () {
     const verifyPlayerName = new VerifyPlayerName(playerRepository);
     const createPlayer = new CreatePlayer(playerRepository, userRepository, idGenerator);
     const createUser = new CreateUser(userRepository, hashingService, idGenerator);
-    const registerNewUser = new RegisterNewUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
+    const registerNewUser = new RegisterUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
     const props = {
       playerName : 'used_name',
       password : '123123',
