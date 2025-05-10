@@ -30,7 +30,8 @@ describe('Entrar no sistema por HTTP', function () {
       const tokenProviderStub = {
         signRefreshToken : () => '321321',
         signAccessToken : () => '123123',
-        validate : () => true,
+        verifyAccessToken : jest.fn(),
+        verifyRefreshToken : jest.fn(),
         decode : () => ({} as Payload),
       };
       const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingService, tokenProviderStub);

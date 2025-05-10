@@ -2,12 +2,14 @@ import {Payload} from "@/application/use-cases/refresh-token";
 
 export default interface TokenProvider {
 
-  signRefreshToken(payload: object): string;
+  signRefreshToken(payload: Payload): string;
 
-  signAccessToken(payload: object): string;
+  signAccessToken(payload: Payload): string;
 
-  validate(token: string): boolean;
+  verifyAccessToken(token: string): boolean;
+
+  verifyRefreshToken(token: string): boolean;
 
   decode(token: string): Payload;
-  
+
 };

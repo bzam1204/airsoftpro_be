@@ -17,7 +17,8 @@ describe('Entrar', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn(),
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : jest.fn(),
     };
     const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingServiceStub, tokenProviderStub);
@@ -35,7 +36,8 @@ describe('Entrar', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn(),
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : jest.fn(),
     };
     const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingServiceStub, tokenProviderStub);
@@ -51,7 +53,8 @@ describe('Entrar', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn(),
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : jest.fn(),
     };
     const login = new Login(fieldAdminRepository, playerRepository, userRepository, hashingServiceStub, tokenProviderStub);

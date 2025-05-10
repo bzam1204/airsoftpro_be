@@ -24,7 +24,8 @@ describe('Registrar novo user', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn(),
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : jest.fn(),
     };
     const verifyPlayerName = new VerifyPlayerName(playerRepository);
@@ -56,7 +57,8 @@ describe('Registrar novo user', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn(),
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : jest.fn(),
     };
     const registerNewUser = new RegisterUser(verifyPlayerName, tokenProviderStub, createPlayer, createUser);
@@ -79,7 +81,8 @@ describe('Registrar novo user', function () {
     const tokenProviderStub = {
       signAccessToken : () => '123123',
       signRefreshToken : () => '321321',
-      validate : jest.fn(),
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : jest.fn(),
     };
     const verifyPlayerName = new VerifyPlayerName(playerRepository);

@@ -1,0 +1,9 @@
+### Refresh Token
+POST http://localhost:3000/refresh-token
+Content-Type: application/json
+
+{
+  "token": "321321"
+}
+
+###

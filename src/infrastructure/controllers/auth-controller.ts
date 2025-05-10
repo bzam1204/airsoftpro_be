@@ -2,6 +2,7 @@ import RegisterUser from "@/application/use-cases/register-user";
 import Login from "@/application/use-cases/login";
 
 import Http from "@/infrastructure/http";
+import RefreshToken from "@/application/use-cases/refresh-token";
 
 export default class AuthController {
 
@@ -9,6 +10,7 @@ export default class AuthController {
       readonly http: Http,
       readonly login: Login,
       readonly registerUser: RegisterUser,
+      readonly refreshToken: RefreshToken,
   ) {
 
     http.on('post', '/login', async function (params: any, body: any) {
@@ -20,6 +22,11 @@ export default class AuthController {
     http.on('post', '/register-user', async function (params: any, body: registerUserOutputDto) {
       return await registerUser.execute({...body, birth : new Date(body.birth)});
     });
+
+    http.on('post', '/refresh-token', async function (params: any, body: any) {
+      return await refreshToken.execute(body);
+    });
+
   };
 
 };

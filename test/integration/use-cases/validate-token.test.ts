@@ -6,7 +6,8 @@ describe('Validar o token', function () {
     const tokenProviderStub = {
       signRefreshToken : jest.fn(),
       signAccessToken : jest.fn(),
-      validate : () => true,
+      verifyAccessToken : () => true,
+      verifyRefreshToken : () => true,
       decode: jest.fn(),
     };
     const validate = new ValidateToken(tokenProviderStub);
@@ -19,7 +20,8 @@ describe('Validar o token', function () {
     const tokenProviderStub = {
       signRefreshToken : jest.fn(),
       signAccessToken : jest.fn(),
-      validate : () => false,
+      verifyAccessToken : () => false,
+      verifyRefreshToken : () => false,
       decode: jest.fn(),
     };
     const validate = new ValidateToken(tokenProviderStub);

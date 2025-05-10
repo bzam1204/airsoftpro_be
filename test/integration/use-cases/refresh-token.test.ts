@@ -8,7 +8,8 @@ describe('Renovar o token', function () {
     const tokenProviderStub = {
       signRefreshToken : () => '321321',
       signAccessToken : () => '123123',
-      validate : () => true,
+      verifyAccessToken : jest.fn(),
+      verifyRefreshToken : jest.fn(),
       decode : () => ({
         sub : '1',
         email : 'user@example.com',

@@ -6,7 +6,9 @@ export default class ValidateToken {
   }
 
   async execute(token: string): Promise<boolean> {
-    return this.tokenProvider.validate(token);
+    const accessVerification = this.tokenProvider.verifyAccessToken(token);
+    const refreshVerification = this.tokenProvider.verifyAccessToken(token);
+    return accessVerification || refreshVerification;
   };
 
 };
