@@ -1,10 +1,9 @@
-import EditGame from "@/application/use-cases/edit-game";
-
 import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
+import EditGame from "@/application/use-cases/game/edit-game";
 
 describe("Editar Partida", function () {
 

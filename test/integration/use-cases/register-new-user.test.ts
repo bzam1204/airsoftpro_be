@@ -1,8 +1,3 @@
-import VerifyPlayerName from "@/application/use-cases/verify-player-name";
-import RegisterUser from "@/application/use-cases/register-user";
-import CreatePlayer from "@/application/use-cases/create-player";
-import CreateUser from "@/application/use-cases/create-user";
-
 import Player from "@/domain/entities/player";
 import User from "@/domain/entities/user";
 
@@ -11,6 +6,10 @@ import HashingServiceBcryptjs from "@/infrastructure/services/hashing-service-bc
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 
 import playerProps from "@test/shared/player-props";
+import RegisterUser from "@/application/use-cases/auth/register-user";
+import CreatePlayer from "@/application/use-cases/player/create-player";
+import VerifyPlayerName from "@/application/use-cases/player/verify-player-name";
+import CreateUser from "@/application/use-cases/auth/create-user";
 
 describe('Registrar novo user', function () {
 

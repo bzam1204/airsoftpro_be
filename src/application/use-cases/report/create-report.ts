@@ -1,11 +1,11 @@
-import PlayerRepository from "@/domain/repositories/player-repository";
 import ReportRepository from "@/domain/repositories/report-repository";
-import ReportMotivation from "@/domain/enums/report-motivation";
+import PlayerRepository from "@/domain/repositories/player-repository";
 import GameRepository from "@/domain/repositories/game-repository";
-import GameStatus from "@/domain/enums/game-status";
+import IdGenerator from "@/application/services/id-generator";
+import ReportMotivation from "@/domain/enums/report-motivation";
 import Report from "@/domain/entities/report";
 import Game from "@/domain/entities/game";
-import IdGenerator from "@/application/services/id-generator";
+import GameStatus from "@/domain/enums/game-status";
 
 export default class CreateReport {
 

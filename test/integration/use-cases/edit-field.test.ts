@@ -1,10 +1,9 @@
-import EditField from "@/application/use-cases/edit-field";
-
 import Field from "@/domain/entities/field";
 
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
 
 import fieldProps from "@test/shared/field-props";
+import EditField from "@/application/use-cases/field/edit-field";
 
 describe('Editar Campo', function () {
 

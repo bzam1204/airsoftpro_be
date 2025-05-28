@@ -1,5 +1,3 @@
-import CreateFieldAdmin from "@/application/use-cases/create-field-admin";
-
 import FieldAdmin from "@/domain/entities/field-admin";
 import User from "@/domain/entities/user";
 
@@ -7,6 +5,7 @@ import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admi
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 
 import userProps from "@test/shared/user-props";
+import CreateFieldAdmin from "@/application/use-cases/field/create-field-admin";
 
 describe('Criar Administrador de Campo', function () {
 

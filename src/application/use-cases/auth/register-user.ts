@@ -1,10 +1,9 @@
-import VerifyPlayerName from "@/application/use-cases/verify-player-name";
-import TokenProvider from "@/application/services/token-provider";
-import CreatePlayer from "@/application/use-cases/create-player";
-import CreateUser from "@/application/use-cases/create-user";
-
-import Player from "@/domain/entities/player";
 import User from "@/domain/entities/user";
+import Player from "@/domain/entities/player";
+import TokenProvider from "@/application/services/token-provider";
+import CreatePlayer from "@/application/use-cases/player/create-player";
+import VerifyPlayerName from "@/application/use-cases/player/verify-player-name";
+import CreateUser from "@/application/use-cases/auth/create-user";
 
 export default class RegisterUser {
 

@@ -1,13 +1,13 @@
 import ReportRepository from "@/domain/repositories/report-repository";
 import Report from "@/domain/entities/report";
 
-export default class ViewReceivedReportsHistory {
+export default class ViewGivenReportsHistory {
 
   constructor(private readonly reportRepository: ReportRepository) {
   }
 
   async execute(playerId: string): Promise<Report[]> {
-    return await this.reportRepository.search({to : playerId});
+    return await this.reportRepository.search({from : playerId});
   };
 
 };

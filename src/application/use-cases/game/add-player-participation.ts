@@ -1,5 +1,5 @@
-import PlayerRepository from "@/domain/repositories/player-repository";
 import GameRepository from "@/domain/repositories/game-repository";
+import PlayerRepository from "@/domain/repositories/player-repository";
 import Game from "@/domain/entities/game";
 
 export default class AddPlayerParticipation {
@@ -27,4 +27,4 @@ export default class AddPlayerParticipation {
     return games.length === 0;
   };
 
-}
+};

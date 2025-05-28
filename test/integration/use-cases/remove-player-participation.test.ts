@@ -1,11 +1,10 @@
-import RemovePlayerParticipation from "@/application/use-cases/remove-player-participation";
-
 import Game from "@/domain/entities/game";
 
 import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
+import RemovePlayerParticipation from "@/application/use-cases/game/remove-player-participation";
 
 describe("Remover Participação", function () {
 

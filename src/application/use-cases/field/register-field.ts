@@ -1,8 +1,8 @@
-import AdminRepository from "@/domain/repositories/admin-repository";
 import FieldRepository from "@/domain/repositories/field-repository";
+import AdminRepository from "@/domain/repositories/admin-repository";
+import IdGenerator from "@/application/services/id-generator";
 import FieldDetails from "@/domain/entities/field-details";
 import Field from "@/domain/entities/field";
-import IdGenerator from "@/application/services/id-generator";
 
 export default class RegisterField {
 

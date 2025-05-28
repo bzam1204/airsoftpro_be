@@ -1,4 +1,4 @@
-import ValidateToken from "@/application/use-cases/validate-token";
+import ValidateToken from "@/application/use-cases/auth/validate-token";
 
 describe('Validar o token', function () {
 

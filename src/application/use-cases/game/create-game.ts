@@ -1,8 +1,8 @@
-import FieldRepository from "@/domain/repositories/field-repository";
+import IdGenerator from "@/application/services/id-generator";
 import GameRepository from "@/domain/repositories/game-repository";
+import FieldRepository from "@/domain/repositories/field-repository";
 import GameRules from "@/domain/entities/game-rules";
 import Game from "@/domain/entities/game";
-import IdGenerator from "@/application/services/id-generator";
 
 export default class CreateGame {
 
@@ -13,7 +13,8 @@ export default class CreateGame {
   ) {
   };
 
-  async execute({fpsLimit, playersLimit, friendlyFire, minHonorLevel, specificRules, ...gameProps}: Props) {
+  async execute(input: Input): Promise<Game> {
+    const {fpsLimit, playersLimit, friendlyFire, minHonorLevel, specificRules, ...gameProps} = input;
     const field = await this.fieldRepository.findById(gameProps.fieldId);
     if (!field) throw new Error("FIELD_NOT_FOUND");
     const gameRules = new GameRules({fpsLimit, playersLimit, friendlyFire, minHonorLevel, specificRules});
@@ -23,7 +24,7 @@ export default class CreateGame {
 
 }
 
-interface Props {
+interface Input {
   specificRules?: string,
   minHonorLevel: number,
   playersLimit: number,

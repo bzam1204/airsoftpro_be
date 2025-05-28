@@ -1,11 +1,10 @@
-import CreateGame from "@/application/use-cases/create-game";
-
 import Game from "@/domain/entities/game";
 
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
+import CreateGame from "@/application/use-cases/game/create-game";
 
 describe("Criar Partida", function () {
   it("Deve criar uma partida", async function () {

@@ -5,7 +5,8 @@ import PlayerRepositoryMemory from "@/infrastructure/repositories/player-reposit
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 
 import userProps from "@test/shared/user-props";
-import CreatePlayer from "@/application/use-cases/create-player";
+
+import CreatePlayer from "@/application/use-cases/player/create-player";
 
 describe('Criar Jogador', function () {
   const userRepository = new UserRepositoryMemory([new User({...userProps, id : '2',})]);

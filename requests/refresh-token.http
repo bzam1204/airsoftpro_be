@@ -3,7 +3,7 @@ POST http://localhost:3000/refresh-token
 Content-Type: application/json
 
 {
-  "token": "321321"
+  "token": "{\"sub\":\"c794c747-7677-49f3-8b7f-50628070a2ca\",\"email\":\"gaby@airsoftpro.com\",\"playerName\":\"gabyludo\",\"roles\":[\"PLAYER\"],\"code\":\"321\"}"
 }
 
 ###

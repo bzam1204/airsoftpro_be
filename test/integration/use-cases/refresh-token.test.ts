@@ -1,6 +1,8 @@
-import RefreshToken from "@/application/use-cases/refresh-token";
-import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
+import RefreshToken from "@/application/use-cases/auth/refresh-token";
+
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
+import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
+import ValidateToken from "@/application/use-cases/auth/validate-token";
 
 describe('Renovar o token', function () {
 
@@ -19,7 +21,8 @@ describe('Renovar o token', function () {
     };
     const playerRepository = new PlayerRepositoryMemory();
     const fieldAdminRepository = new FieldAdminRepositoryMemory();
-    const refresh = new RefreshToken(fieldAdminRepository, playerRepository, tokenProviderStub);
+    const validateToken = {execute : () => true} as unknown as ValidateToken;
+    const refresh = new RefreshToken(fieldAdminRepository, playerRepository, tokenProviderStub, validateToken);
     const {accessToken, refreshToken} = await refresh.execute('123123');
     expect(accessToken).toBe('123123');
     expect(refreshToken).toBe('321321');

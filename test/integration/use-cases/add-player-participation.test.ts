@@ -1,5 +1,3 @@
-import AddPlayerParticipation from "@/application/use-cases/add-player-participation";
-
 import GameRules from "@/domain/entities/game-rules";
 import Game from "@/domain/entities/game";
 
@@ -7,6 +5,7 @@ import PlayerRepositoryMemory from "@/infrastructure/repositories/player-reposit
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
+import AddPlayerParticipation from "@/application/use-cases/game/add-player-participation";
 
 describe('Adicionar Participação', function () {
 

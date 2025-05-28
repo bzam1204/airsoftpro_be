@@ -1,11 +1,10 @@
-import CancelGame from "@/application/use-cases/cancel-game";
-
 import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
 import GameStatus from "@/domain/enums/game-status";
+import CancelGame from "@/application/use-cases/game/cancel-game";
 
 describe('Cancelar Partida', function () {
 

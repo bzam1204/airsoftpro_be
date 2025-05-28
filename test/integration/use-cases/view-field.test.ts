@@ -1,8 +1,7 @@
-import ViewField from "@/application/use-cases/view-field";
-
 import Field from "@/domain/entities/field";
 
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
+import ViewField from "@/application/use-cases/field/view-field";
 
 describe('Visualizar Campo', function () {
   

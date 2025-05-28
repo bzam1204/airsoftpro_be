@@ -1,10 +1,9 @@
-import ViewFieldList from "@/application/use-cases/view-field-list";
-
 import Field from "@/domain/entities/field";
 
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
 
 import fieldProps from "@test/shared/field-props";
+import ViewFieldList from "@/application/use-cases/field/view-field-list";
 
 describe('Ver Lista de Campos', function () {
 

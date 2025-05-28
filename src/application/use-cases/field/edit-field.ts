@@ -6,7 +6,7 @@ export default class EditField {
   constructor(private readonly fieldRepository: FieldRepository) {
   };
 
-  async execute({id, name, ...input}: Props): Promise<Field> {
+  async execute({id, name, ...input}: Input): Promise<Field> {
     const field = await this.fieldRepository.findById(id);
     if (!field) throw new Error('FIELD_NOT_FOUND');
     field.editInfo({...input, name});
@@ -15,7 +15,7 @@ export default class EditField {
 
 };
 
-interface Props {
+interface Input {
   infrastructure: string;
   description: string;
   coordinates?: string;

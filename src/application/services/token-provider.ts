@@ -1,4 +1,4 @@
-import {Payload} from "@/application/use-cases/refresh-token";
+import {Payload} from "@/application/use-cases/auth/refresh-token";
 
 export default interface TokenProvider {
 

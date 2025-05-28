@@ -5,7 +5,8 @@ import PlayerRepositoryMemory from "@/infrastructure/repositories/player-reposit
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 
 import userProps from "@test/shared/user-props";
-import Login from "@/application/use-cases/login";
+
+import Login from "@/application/use-cases/auth/login";
 
 describe('Entrar', function () {
 

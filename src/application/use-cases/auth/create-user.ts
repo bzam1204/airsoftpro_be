@@ -1,7 +1,6 @@
+import UserRepository from "@/domain/repositories/user-repository";
 import HashingService from "@/application/services/hashing-service";
 import IdGenerator from "@/application/services/id-generator";
-
-import UserRepository from "@/domain/repositories/user-repository";
 import User from "@/domain/entities/user";
 
 export default class CreateUser {

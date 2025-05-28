@@ -1,7 +1,7 @@
 import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
-import VerifyPlayerName from "@/application/use-cases/verify-player-name";
 import Player from "@/domain/entities/player";
 import playerProps from "@test/shared/player-props";
+import VerifyPlayerName from "@/application/use-cases/player/verify-player-name";
 
 describe('Verificar disponibilidade do nome de jogador', function () {
 

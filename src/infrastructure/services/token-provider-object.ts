@@ -1,6 +1,6 @@
 import TokenProvider from "@/application/services/token-provider";
 
-import {Payload} from "@/application/use-cases/refresh-token";
+import {Payload} from "@/application/use-cases/auth/refresh-token";
 
 export default class TokenProviderObject implements TokenProvider {
   private readonly refreshSecret = '321';

@@ -1,7 +1,8 @@
 import ReportRepositoryMemory from "@/infrastructure/repositories/report-repository-memory";
 import Report from "@/domain/entities/report";
 import reportProps from "@test/unit/report-props";
-import ViewReceivedReportsHistory from "@/application/use-cases/view-received-reports-history";
+
+import ViewReceivedReportsHistory from "@/application/use-cases/report/view-received-reports-history";
 
 describe('Ver Histórico de Denúncias Recebidas', function () {
   

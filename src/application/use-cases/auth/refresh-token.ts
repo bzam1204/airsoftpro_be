@@ -2,7 +2,7 @@ import TokenProvider from "@/application/services/token-provider";
 
 import FieldAdminRepository from "@/domain/repositories/field-admin-repository";
 import PlayerRepository from "@/domain/repositories/player-repository";
-import ValidateToken from "@/application/use-cases/validate-token";
+import ValidateToken from "@/application/use-cases/auth/validate-token";
 
 export default class RefreshToken {
 
@@ -15,7 +15,7 @@ export default class RefreshToken {
   }
 
   async execute(token: string): Promise<Output> {
-    if (! await this.isTokenValid(token)) throw new Error('INVALID_TOKEN');
+    if (!await this.isTokenValid(token)) throw new Error('INVALID_TOKEN');
     const {sub : userId, email} = this.tokenProvider.decode(token);
     const player = await this.playerRepository.findByUserId(userId);
     if (!player) throw new Error('PLAYER_NOT_EXISTS');
@@ -43,7 +43,7 @@ export default class RefreshToken {
   private async isTokenValid(token: string) {
     return await this.validateToken.execute(token);
   };
-  
+
 };
 
 interface Output {

@@ -1,8 +1,7 @@
 import request from 'supertest';
 import express from "express";
 
-import {Payload} from "@/application/use-cases/refresh-token";
-import Login from "@/application/use-cases/login";
+import {Payload} from "@/application/use-cases/auth/refresh-token";
 
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
 import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
@@ -12,6 +11,7 @@ import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-
 import User from "@/domain/entities/user";
 
 import userProps from "@test/shared/user-props";
+import Login from "@/application/use-cases/auth/login";
 
 describe('Entrar no sistema por HTTP', function () {
   let app: any;

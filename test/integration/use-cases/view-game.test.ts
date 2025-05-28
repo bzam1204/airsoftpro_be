@@ -1,9 +1,8 @@
-import ViewGame from "@/application/use-cases/view-game";
-
 import GameRepository from "@/domain/repositories/game-repository";
 import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
+import ViewGame from "@/application/use-cases/game/view-game";
 
 describe("Ver uma Partida", function () {
 

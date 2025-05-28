@@ -1,5 +1,3 @@
-import JoinGame from "@/application/use-cases/join-game";
-
 import GameStatus from "@/domain/enums/game-status";
 import GameRules from "@/domain/entities/game-rules";
 import Game from "@/domain/entities/game";
@@ -8,6 +6,7 @@ import PlayerRepositoryMemory from "@/infrastructure/repositories/player-reposit
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
+import JoinGame from "@/application/use-cases/game/join-game";
 
 describe("Entrar na Partida", function () {
 

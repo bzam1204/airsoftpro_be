@@ -1,11 +1,10 @@
-import StartGame from "@/application/use-cases/start-game";
-
 import Game from "@/domain/entities/game";
 
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 
 import gameProps from "@test/shared/game-props";
 import GameStatus from "@/domain/enums/game-status";
+import StartGame from "@/application/use-cases/game/start-game";
 
 describe('Iniciar Partida', function () {
 

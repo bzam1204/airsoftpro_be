@@ -1,9 +1,8 @@
-import RegisterField from "@/application/use-cases/register-field";
-
 import Field from "@/domain/entities/field";
 
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
 import AdminRepositoryMemory from "@/infrastructure/repositories/admin-repository-memory";
+import RegisterField from "@/application/use-cases/field/register-field";
 
 describe('Registrar Campo', function () {
   const idGenerator = {generate : () => '1'};

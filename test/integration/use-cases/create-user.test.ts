@@ -1,9 +1,8 @@
-import CreateUser from "@/application/use-cases/create-user";
-
 import User from "@/domain/entities/user";
 
 import HashingServiceBcryptjs from "@/infrastructure/services/hashing-service-bcryptjs";
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
+import CreateUser from "@/application/use-cases/auth/create-user";
 
 describe('Criar Usuário', function () {
   const hashingService = new HashingServiceBcryptjs();
