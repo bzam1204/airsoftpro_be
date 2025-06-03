@@ -3,16 +3,24 @@ import PlayerRepository from "@/domain/repositories/player-repository";
 import UserRepository from "@/domain/repositories/user-repository";
 import HashingService from "@/application/services/hashing-service";
 import TokenProvider from "@/application/services/token-provider";
+import {inject, injectable} from "tsyringe";
+import {
+  FIELD_ADMIN_REPOSITORY,
+  HASHING_SERVICE,
+  PLAYER_REPOSITORY, TOKEN_PROVIDER,
+  USER_REPOSITORY
+} from "@/shared/constants/constants";
 
+@injectable()
 export default class Login {
 
   constructor(
-      private readonly fieldAdminRepository: FieldAdminRepository,
-      private readonly playerRepository: PlayerRepository,
-      private readonly userRepository: UserRepository,
-      private readonly hashingService: HashingService,
-      private readonly tokenProvider: TokenProvider,
-  ) {
+      @inject(FIELD_ADMIN_REPOSITORY) private readonly fieldAdminRepository: FieldAdminRepository,
+      @inject(PLAYER_REPOSITORY) private readonly playerRepository: PlayerRepository,
+      @inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+      @inject(HASHING_SERVICE) private readonly hashingService: HashingService,
+      @inject(TOKEN_PROVIDER) private readonly tokenProvider: TokenProvider,
+  ) {``
   }
 
   async execute(input: Input): Promise<Output> {

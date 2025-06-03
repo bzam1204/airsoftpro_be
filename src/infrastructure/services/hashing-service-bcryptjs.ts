@@ -1,7 +1,9 @@
 import bcrypt from 'bcryptjs';
 
 import HashingService from "@/application/services/hashing-service";
+import {injectable} from "tsyringe";
 
+@injectable()
 export default class HashingServiceBcryptjs implements HashingService {
   bcrypt = bcrypt;
 

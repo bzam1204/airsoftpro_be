@@ -3,14 +3,17 @@ import TokenProvider from "@/application/services/token-provider";
 import FieldAdminRepository from "@/domain/repositories/field-admin-repository";
 import PlayerRepository from "@/domain/repositories/player-repository";
 import ValidateToken from "@/application/use-cases/auth/validate-token";
+import {inject, injectable} from "tsyringe";
+import {FIELD_ADMIN_REPOSITORY, PLAYER_REPOSITORY, TOKEN_PROVIDER, VALIDATE_TOKEN} from "@/shared/constants/constants";
 
+@injectable()
 export default class RefreshToken {
 
   constructor(
-      private readonly fieldAdminRepository: FieldAdminRepository,
-      private readonly playerRepository: PlayerRepository,
-      private readonly tokenProvider: TokenProvider,
-      private readonly validateToken: ValidateToken
+      @inject(FIELD_ADMIN_REPOSITORY) private readonly fieldAdminRepository: FieldAdminRepository,
+      @inject(PLAYER_REPOSITORY) private readonly playerRepository: PlayerRepository,
+      @inject(TOKEN_PROVIDER) private readonly tokenProvider: TokenProvider,
+      @inject(VALIDATE_TOKEN) private readonly validateToken: ValidateToken
   ) {
   }
 
@@ -52,8 +55,9 @@ interface Output {
 }
 
 export interface Payload {
-  sub: string;
-  email: string;
-  roles: string[];
   playerName: string;
+  roles: string[];
+  email: string;
+  sub: string;
 }
+

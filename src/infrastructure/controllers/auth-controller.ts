@@ -1,28 +1,29 @@
-import Http from "@/infrastructure/http";
+import {inject, injectable} from "tsyringe";
+
 import RefreshToken from "@/application/use-cases/auth/refresh-token";
 import Login from "@/application/use-cases/auth/login";
-import RegisterUser from "@/application/use-cases/auth/register-user";
 
+import Http from "@/infrastructure/http";
+
+import {HTTP, LOGIN, REFRESH_TOKEN, REGISTER_USER} from "@/shared/constants/constants";
+
+@injectable()
 export default class AuthController {
+  private readonly PREFIX = '/auth';
 
   constructor(
-      readonly http: Http,
-      readonly login: Login,
-      readonly registerUser: RegisterUser,
-      readonly refreshToken: RefreshToken,
+      @inject(REFRESH_TOKEN) readonly refreshToken: RefreshToken,
+      @inject(LOGIN) readonly login: Login,
+      @inject(HTTP) readonly http: Http,
   ) {
 
-    http.on('post', '/login', async function (params: any, body: any) {
+    http.on('post', `${this.PREFIX}/login`, async function (params: any, body: any) {
       const {email, password} = body;
       const {accessToken, refreshToken} = await login.execute({email, password});
       return {accessToken, refreshToken};
     });
-
-    http.on('post', '/register-user', async function (params: any, body: registerUserOutputDto) {
-      return await registerUser.execute({...body, birth : new Date(body.birth)});
-    });
-
-    http.on('post', '/refresh-token', async function (params: any, body: {token: string}) {
+    
+    http.on('post', `${this.PREFIX}/refresh-token`, async function (params: any, body: {token: string}) {
       return await refreshToken.execute(body.token);
     });
 
@@ -30,7 +31,7 @@ export default class AuthController {
 
 };
 
-interface registerUserOutputDto {
+interface registerUserInputDto {
   playerName: string;
   password: string;
   fullName: string;

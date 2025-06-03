@@ -1,12 +1,17 @@
-import GameRepository from "@/domain/repositories/game-repository";
+import {inject, injectable} from "tsyringe";
+
 import PlayerRepository from "@/domain/repositories/player-repository";
+import GameRepository from "@/domain/repositories/game-repository";
 import Game from "@/domain/entities/game";
 
+import {GAME_REPOSITORY, PLAYER_REPOSITORY} from "@/shared/constants/constants";
+
+@injectable()
 export default class AddPlayerParticipation {
 
   constructor(
-      private readonly gameRepository: GameRepository,
-      private readonly playerRepository: PlayerRepository) {
+      @inject(GAME_REPOSITORY) private readonly gameRepository: GameRepository,
+      @inject(PLAYER_REPOSITORY) private readonly playerRepository: PlayerRepository) {
   }
 
   async execute(gameId: string, playerId: string): Promise<Game> {

@@ -1,7 +1,9 @@
 import Player from "@/domain/entities/player";
 import PlayerRepository from "@/domain/repositories/player-repository";
 import playerProps from "@test/shared/player-props";
+import {injectable} from "tsyringe";
 
+@injectable()
 export default class PlayerRepositoryMemory implements PlayerRepository {
   private readonly players: Player[];
 

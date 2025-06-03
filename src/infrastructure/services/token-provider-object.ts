@@ -1,7 +1,9 @@
 import TokenProvider from "@/application/services/token-provider";
 
 import {Payload} from "@/application/use-cases/auth/refresh-token";
+import {injectable} from "tsyringe";
 
+@injectable()
 export default class TokenProviderObject implements TokenProvider {
   private readonly refreshSecret = '321';
   private readonly accessSecret = '123';

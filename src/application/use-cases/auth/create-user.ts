@@ -2,14 +2,17 @@ import UserRepository from "@/domain/repositories/user-repository";
 import HashingService from "@/application/services/hashing-service";
 import IdGenerator from "@/application/services/id-generator";
 import User from "@/domain/entities/user";
+import {inject, injectable} from "tsyringe";
+import {HASHING_SERVICE, ID_GENERATOR, USER_REPOSITORY} from "@/shared/constants/constants";
 
+@injectable()
 export default class CreateUser {
   saltRounds = 10;
 
   constructor(
-      private readonly userRepository: UserRepository,
-      private readonly hashingService: HashingService,
-      private readonly idGenerator: IdGenerator,
+      @inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+      @inject(HASHING_SERVICE) private readonly hashingService: HashingService,
+      @inject(ID_GENERATOR) private readonly idGenerator: IdGenerator,
   ) {
   };
 

@@ -2,13 +2,16 @@ import FieldAdminRepository from "@/domain/repositories/field-admin-repository";
 import UserRepository from "@/domain/repositories/user-repository";
 import IdGenerator from "@/application/services/id-generator";
 import FieldAdmin from "@/domain/entities/field-admin";
+import {inject, injectable} from "tsyringe";
+import {FIELD_ADMIN_REPOSITORY, ID_GENERATOR, USER_REPOSITORY} from "@/shared/constants/constants";
 
+@injectable()
 export default class CreateFieldAdmin {
 
   constructor(
-      private readonly fieldAdminRepository: FieldAdminRepository,
-      private readonly userRepository: UserRepository,
-      private readonly idGenerator: IdGenerator,
+      @inject(FIELD_ADMIN_REPOSITORY) private readonly fieldAdminRepository: FieldAdminRepository,
+      @inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+      @inject(ID_GENERATOR) private readonly idGenerator: IdGenerator,
   ) {
   }
 

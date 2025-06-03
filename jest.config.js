@@ -1,15 +1,17 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 module.exports = {
+  setupFiles : [ 'reflect-metadata' ],
   testEnvironment : "node",
   transform : {
     "^.+\.ts?$" : [ "ts-jest", {} ],
-  }, 
-  modulePaths: [ "<rootDir>" ],
-  moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1",
-    "^@test/(.*)$": "<rootDir>/test/$1"
-  }, 
-  rootDir: ".",
-  collectCoverage: true,
-  moduleFileExtensions: ["js", "ts"],
+  },
+
+  modulePaths : [ "<rootDir>" ],
+  moduleNameMapper : {
+    "^@/(.*)$" : "<rootDir>/src/$1",
+    "^@test/(.*)$" : "<rootDir>/test/$1"
+  },
+  rootDir : ".",
+  collectCoverage : true,
+  moduleFileExtensions : [ "js", "ts" ],
 };

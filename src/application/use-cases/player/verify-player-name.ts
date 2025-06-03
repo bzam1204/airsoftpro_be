@@ -1,8 +1,11 @@
 import PlayerRepository from "@/domain/repositories/player-repository";
+import {inject, injectable} from "tsyringe";
+import {PLAYER_REPOSITORY} from "@/shared/constants/constants";
 
+@injectable()
 export default class VerifyPlayerName {
 
-  constructor(private readonly playerRepository: PlayerRepository) {
+  constructor(@inject(PLAYER_REPOSITORY) private readonly playerRepository: PlayerRepository) {
   };
 
   async execute(playerName: string): Promise<boolean> {

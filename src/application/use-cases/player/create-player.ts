@@ -2,13 +2,16 @@ import PlayerRepository from "@/domain/repositories/player-repository";
 import UserRepository from "@/domain/repositories/user-repository";
 import IdGenerator from "@/application/services/id-generator";
 import Player from "@/domain/entities/player";
+import {inject, injectable} from "tsyringe";
+import {ID_GENERATOR, PLAYER_REPOSITORY, USER_REPOSITORY} from "@/shared/constants/constants";
 
+@injectable()
 export default class CreatePlayer {
 
   constructor(
-      private readonly playerRepository: PlayerRepository,
-      private readonly userRepository: UserRepository,
-      private readonly idGenerator: IdGenerator,
+      @inject(PLAYER_REPOSITORY) private readonly playerRepository: PlayerRepository,
+      @inject(USER_REPOSITORY) private readonly userRepository: UserRepository,
+      @inject(ID_GENERATOR) private readonly idGenerator: IdGenerator,
   ) {
   }
 

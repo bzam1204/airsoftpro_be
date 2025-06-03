@@ -1,6 +1,8 @@
 import FieldAdminRepository from "@/domain/repositories/field-admin-repository";
 import FieldAdmin from "@/domain/entities/field-admin";
+import {injectable} from "tsyringe";
 
+@injectable()
 export default class FieldAdminRepositoryMemory implements FieldAdminRepository {
   private _admins: FieldAdmin[];
 

@@ -4,14 +4,17 @@ import TokenProvider from "@/application/services/token-provider";
 import CreatePlayer from "@/application/use-cases/player/create-player";
 import VerifyPlayerName from "@/application/use-cases/player/verify-player-name";
 import CreateUser from "@/application/use-cases/auth/create-user";
+import {inject, injectable} from "tsyringe";
+import {CREATE_PLAYER, CREATE_USER, TOKEN_PROVIDER, VERIFY_PLAYER_NAME} from "@/shared/constants/constants";
 
+@injectable()
 export default class RegisterUser {
 
   constructor(
-      private readonly verifyPlayerName: VerifyPlayerName,
-      private readonly tokenProvider: TokenProvider,
-      private readonly createPlayer: CreatePlayer,
-      private readonly createUser: CreateUser,
+      @inject(VERIFY_PLAYER_NAME) private readonly verifyPlayerName: VerifyPlayerName,
+      @inject(TOKEN_PROVIDER) private readonly tokenProvider: TokenProvider,
+      @inject(CREATE_PLAYER) private readonly createPlayer: CreatePlayer,
+      @inject(CREATE_USER) private readonly createUser: CreateUser,
   ) {
   };
 
