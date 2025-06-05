@@ -25,6 +25,7 @@ import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 import TokenProviderObject from "@/infrastructure/services/token-provider-object";
 import UUIDGenerator from "@/infrastructure/services/id-generator";
+import EditField from "@/application/use-cases/field/edit-field";
 
 container.register(Constants.FIELD_ADMIN_REPOSITORY, {useValue : new FieldAdminRepositoryMemory()});
 container.register(Constants.REPORT_REPOSITORY, {useValue : new ReportRepositoryMemory()});
@@ -49,6 +50,7 @@ container.register(Constants.CREATE_REPORT, {useClass : CreateReport});
 container.register(Constants.CREATE_USER, {useClass : CreateUser});
 container.register(Constants.CANCEL_GAME, {useClass : CancelGame});
 container.register(Constants.CREATE_GAME, {useClass : CreateGame});
+container.register(Constants.EDIT_FIELD, {useClass : EditField});
 container.register(Constants.LOGIN, {useClass : Login});
 
 export default container;

@@ -1,16 +1,17 @@
 import {inject, injectable} from "tsyringe";
 
-import CancelParticipation from "@/application/use-cases/game/cancel-participation";
 import AddPlayerParticipation from "@/application/use-cases/game/add-player-participation";
+import CancelParticipation from "@/application/use-cases/game/cancel-participation";
+import CreatePlayer from "@/application/use-cases/player/create-player";
 
 import Http from "@/infrastructure/http";
 
 import {
-  ADD_PLAYER_PARTICIPATION, CREATE_PLAYER,
+  ADD_PLAYER_PARTICIPATION,
+  CANCEL_PARTICIPATION,
+  CREATE_PLAYER,
   HTTP,
-  CANCEL_PARTICIPATION
 } from "@/shared/constants/constants";
-import CreatePlayer from "@/application/use-cases/player/create-player";
 
 @injectable()
 export default class PlayerController {
