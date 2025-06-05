@@ -6,26 +6,30 @@ import ReportMotivation from "@/domain/enums/report-motivation";
 import Report from "@/domain/entities/report";
 import Game from "@/domain/entities/game";
 import GameStatus from "@/domain/enums/game-status";
+import {inject, injectable} from "tsyringe";
+import {GAME_REPOSITORY, ID_GENERATOR, PLAYER_REPOSITORY, REPORT_REPOSITORY} from "@/shared/constants/constants";
 
+@injectable()
 export default class CreateReport {
 
   constructor(
-      private readonly reportRepository: ReportRepository,
-      private readonly playerRepository: PlayerRepository,
-      private readonly gameRepository: GameRepository,
-      private readonly idGenerator: IdGenerator,
+      @inject(REPORT_REPOSITORY) private readonly reportRepository: ReportRepository,
+      @inject(PLAYER_REPOSITORY) private readonly playerRepository: PlayerRepository,
+      @inject(GAME_REPOSITORY) private readonly gameRepository: GameRepository,
+      @inject(ID_GENERATOR) private readonly idGenerator: IdGenerator,
   ) {
   };
 
   async execute({motivation, gameId, from, to}: {
-    motivation: ReportMotivation
+    motivation: ReportMotivation;
     gameId: string;
     from: string;
-    to: string,
+    to: string;
   }): Promise<Report> {
     const game = await this.gameRepository.findById(gameId);
     if (!game) throw new Error('GAME_NOT_FOUND');
     if (!this.isGameFinished(game)) throw new Error("GAME_IS_NOT_FINISHED");
+    if (this.senderAndRecipientAreTheSame(from, to)) throw new Error('SENDER_AND_RECIPIENT_ARE_THE_SAME');
     const recipientPlayer = await this.playerRepository.findById(to);
     if (!recipientPlayer) throw new Error('RECIPIENT_PLAYER_NOT_FOUND');
     const senderPlayer = await this.playerRepository.findById(from);
@@ -41,7 +45,7 @@ export default class CreateReport {
 
   private isGameFinished(game: Game) {
     return game.status === GameStatus.FINISHED;
-  }
+  };
 
   private didPlayTogether(game: Game, from: string, to: string) {
     return game.playerList.includes(from) && game.playerList.includes(to);
@@ -50,6 +54,10 @@ export default class CreateReport {
   private async isFirstReport(gameId: string, from: string, to: string) {
     const reports = await this.reportRepository.search({gameId, from, to});
     return reports.length === 0;
+  };
+  
+  private senderAndRecipientAreTheSame(senderId: string, recipientId: string) {
+    return senderId === recipientId;
   };
 
 };

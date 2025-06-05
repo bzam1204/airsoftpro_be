@@ -64,6 +64,14 @@ describe('Criar Denúncia', function () {
     await expect(useCase).rejects.toThrow('DIDNT_PLAYED_TOGETHER');
   });
 
+  it('Não deve denunciar se denunciador e denunciado forem o mesmo jogador', async function () {
+    const game = new Game({...gameProps, playerList : ['1', '3'], status : GameStatus.FINISHED});
+    const gameRepository = new GameRepositoryMemory([game]);
+    const createReport = new CreateReport(reportRepository(), playerRepository(), gameRepository, idGenerator);
+    const useCase = createReport.execute({...reportProps, from: '1', to: '1'});
+    await expect(useCase).rejects.toThrow('SENDER_AND_RECIPIENT_ARE_THE_SAME');
+  });
+
   it('Não deve denunciar em partidas que não estejam finalizadas', async function () {
     const gameRepository = new GameRepositoryMemory([new Game({...gameProps, playerList : ['1', '2']})]);
     const createReport = new CreateReport(reportRepository(), playerRepository(), gameRepository, idGenerator);

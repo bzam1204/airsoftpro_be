@@ -8,12 +8,14 @@ import ExpressAdapter from "@/infrastructure/express-adapter";
 import container from "@/infrastructure/container";
 
 import {HTTP} from "@/shared/constants/constants";
+import ReportController from "@/infrastructure/controllers/report-controller";
 
 const app = new ExpressAdapter();
 
 container.register(HTTP, {useValue : app});
 container.resolve(AccountController);
 container.resolve(PlayerController);
+container.resolve(ReportController);
 container.resolve(AuthController);
 container.resolve(GameController);
 

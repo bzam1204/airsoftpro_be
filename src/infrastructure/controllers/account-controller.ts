@@ -19,13 +19,13 @@ export default class AccountController {
       @inject(HTTP) readonly http: Http,
   ) {
 
-    http.on('post', `${this.PREFIX}/user`,async function (params: any, body: registerUserInputDto) {
+    http.on('post', this.PREFIX, async function (params: any, body: registerUserInputDto) {
       return await registerUser.execute({...body, birth : new Date(body.birth)});
     });
-    
+
     //TODO: implement the jwt guard to protect this route and hydrate the user info
-    http.on('post', `${this.PREFIX}/field-admin`,async function (params: any, body: {userId: string}) {
-      return await createFieldAdmin.execute({userId: body.userId});
+    http.on('post', `${this.PREFIX}/field-admin`, async function (params: any, body: {userId: string}) {
+      return await createFieldAdmin.execute({userId : body.userId});
     });
 
   };

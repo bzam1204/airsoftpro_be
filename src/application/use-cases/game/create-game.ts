@@ -1,15 +1,19 @@
 import IdGenerator from "@/application/services/id-generator";
-import GameRepository from "@/domain/repositories/game-repository";
+
 import FieldRepository from "@/domain/repositories/field-repository";
+import GameRepository from "@/domain/repositories/game-repository";
 import GameRules from "@/domain/entities/game-rules";
 import Game from "@/domain/entities/game";
+import {inject, injectable} from "tsyringe";
+import {FIELD_REPOSITORY, GAME_REPOSITORY, ID_GENERATOR} from "@/shared/constants/constants";
 
+@injectable()
 export default class CreateGame {
 
   constructor(
-      private readonly idGenerator: IdGenerator,
-      private readonly gameRepository: GameRepository,
-      private readonly fieldRepository: FieldRepository,
+      @inject(ID_GENERATOR) private readonly idGenerator: IdGenerator,
+      @inject(GAME_REPOSITORY) private readonly gameRepository: GameRepository,
+      @inject(FIELD_REPOSITORY) private readonly fieldRepository: FieldRepository,
   ) {
   };
 
@@ -22,7 +26,7 @@ export default class CreateGame {
     return this.gameRepository.create(game);
   };
 
-}
+};
 
 interface Input {
   specificRules?: string,
