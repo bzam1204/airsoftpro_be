@@ -9,7 +9,6 @@ import GameController from "@/infrastructure/controllers/game-controller";
 import ExpressAdapter from "@/infrastructure/express-adapter";
 import container from "@/infrastructure/container";
 
-import {swaggerSpec} from '@/shared/config/swagger';
 import {HTTP} from "@/shared/constants/constants";
 
 const app = new ExpressAdapter();
