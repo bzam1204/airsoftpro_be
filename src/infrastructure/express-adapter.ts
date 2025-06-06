@@ -1,4 +1,6 @@
 import express, {Express} from "express";
+import {swaggerSpec} from "@/shared/config/swagger";
+import swaggerUi from 'swagger-ui-express';
 
 import Http from "@/infrastructure/http";
 import * as http from "node:http";
@@ -9,8 +11,9 @@ export default class ExpressAdapter implements Http {
   constructor() {
     this.app = express();
     this.app.use(express.json());
+    this.app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   };
-  
+
   getInstance(): Express {
     return this.app;
   };
