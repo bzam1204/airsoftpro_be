@@ -15,7 +15,7 @@ export default class EditField {
     const field = await this.fieldRepository.findById(id);
     if (!field) throw new Error('FIELD_NOT_FOUND');
     field.editInfo({...input, name});
-    return field;
+    return await this.fieldRepository.update(field);
   };
 
 };

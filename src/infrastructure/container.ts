@@ -14,6 +14,8 @@ import CreateReport from "@/application/use-cases/report/create-report";
 import CreateUser from "@/application/use-cases/auth/create-user";
 import CancelGame from "@/application/use-cases/game/cancel-game";
 import CreateGame from "@/application/use-cases/game/create-game";
+import EditField from "@/application/use-cases/field/edit-field";
+import EditGame from "@/application/use-cases/game/edit-game";
 import Login from "@/application/use-cases/auth/login";
 
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
@@ -25,7 +27,6 @@ import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 import TokenProviderObject from "@/infrastructure/services/token-provider-object";
 import UUIDGenerator from "@/infrastructure/services/id-generator";
-import EditField from "@/application/use-cases/field/edit-field";
 
 container.register(Constants.FIELD_ADMIN_REPOSITORY, {useValue : new FieldAdminRepositoryMemory()});
 container.register(Constants.REPORT_REPOSITORY, {useValue : new ReportRepositoryMemory()});
@@ -51,6 +52,7 @@ container.register(Constants.CREATE_USER, {useClass : CreateUser});
 container.register(Constants.CANCEL_GAME, {useClass : CancelGame});
 container.register(Constants.CREATE_GAME, {useClass : CreateGame});
 container.register(Constants.EDIT_FIELD, {useClass : EditField});
+container.register(Constants.EDIT_GAME, {useClass : EditGame});
 container.register(Constants.LOGIN, {useClass : Login});
 
 export default container;

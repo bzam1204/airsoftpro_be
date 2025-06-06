@@ -6,7 +6,8 @@ import Login from "@/application/use-cases/auth/login";
 
 import Http from "@/infrastructure/http";
 
-import {CANCEL_GAME, CREATE_GAME, HTTP, LOGIN} from "@/shared/constants/constants";
+import {CANCEL_GAME, CREATE_GAME, EDIT_GAME, HTTP, LOGIN} from "@/shared/constants/constants";
+import EditGame from "@/application/use-cases/game/edit-game";
 
 @injectable()
 export default class GameController {
@@ -15,6 +16,7 @@ export default class GameController {
   constructor(
       @inject(CANCEL_GAME) readonly cancelGame: CancelGame,
       @inject(CREATE_GAME) readonly createGame: CreateGame,
+      @inject(EDIT_GAME) readonly editGame: EditGame,
       @inject(LOGIN) readonly login: Login,
       @inject(HTTP) readonly http: Http,
   ) {
@@ -25,8 +27,18 @@ export default class GameController {
       return {game};
     });
 
+    http.on('put', `${this.PREFIX}/:id`, async function (params: {id: string}, body: EditGameInputDto) {
+      const id = params.id;
+      const game = await editGame.execute({
+        ...body,
+        id,
+        startDate : body.startDate ? new Date(body.startDate) : body.startDate,
+      });
+      return {game};
+    });
+
     http.on('post', this.PREFIX, async function (params: any, body: CreateGameInputDto) {
-      const game = createGame.execute(body);
+      const game = createGame.execute({...body, startDate : new Date(body.startDate)});
       return {game};
     });
 
@@ -44,4 +56,16 @@ interface CreateGameInputDto {
   fpsLimit?: number,
   gameMode: string,
   fieldId: string,
+}
+
+interface EditGameInputDto {
+  specificRules?: string;
+  minHonorLevel?: number;
+  playersLimit?: number;
+  friendlyFire?: boolean;
+  description?: string;
+  startDate?: Date;
+  fpsLimit?: number;
+  gameMode?: string;
+  fieldId?: string;
 }

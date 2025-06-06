@@ -6,4 +6,6 @@ export default interface FieldRepository {
   findById(fieldId: string): Promise<Field | null>;
 
   create(field: Field): Promise<Field>;
+  
+  update(field: Field): Promise<Field>;
 }

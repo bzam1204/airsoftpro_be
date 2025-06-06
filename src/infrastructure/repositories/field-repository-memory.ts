@@ -1,5 +1,6 @@
 import FieldRepository from "@/domain/repositories/field-repository";
 import Field from "@/domain/entities/field";
+
 import fieldProps from "@test/shared/field-props";
 
 export default class FieldRepositoryMemory implements FieldRepository {
@@ -11,7 +12,7 @@ export default class FieldRepositoryMemory implements FieldRepository {
 
   async findAll(): Promise<Field[]> {
     return this.fields;
-  }  ;
+  };
 
   async findById(id: string): Promise<Field | null> {
     const field = this.fields.find(p => p.id === id);
@@ -20,6 +21,13 @@ export default class FieldRepositoryMemory implements FieldRepository {
 
   async create(field: Field): Promise<Field> {
     this.fields.push(field)
+    return field;
+  };
+
+  async update(field: Field): Promise<Field> {
+    const index = this.fields.findIndex(p => p.id === field.id);
+    if (index === -1) throw new Error("FIELD_NOT_FOUND");
+    this.fields[index] = field;
     return field;
   };
 

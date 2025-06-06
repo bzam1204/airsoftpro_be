@@ -25,10 +25,10 @@ describe('Criar Partida por HTTP', function () {
       playersLimit : 10,
       description : 'uma partida sem precedentes',
       friendlyFire : true,
-      startDate : '2025-06-20T15:00:00',
-      fpsLimit: 400,
+      startDate : new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      fpsLimit : 400,
       gameMode : 'MILSIM',
-      fieldId: '1',
+      fieldId : '1',
     };
     await request(app.getInstance())
         .post('/game')

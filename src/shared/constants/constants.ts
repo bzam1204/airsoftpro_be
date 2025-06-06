@@ -18,6 +18,7 @@ export const CREATE_GAME = Symbol('CREATE_GAME');
 export const CANCEL_GAME = Symbol('CANCEL_GAME');
 export const CREATE_USER = Symbol('CREATE_USER');
 export const EDIT_FIELD = Symbol('EDIT_FIELD');
+export const EDIT_GAME = Symbol('EDIT_GAME');
 export const LOGIN = Symbol('LOGIN');
 
 export const HASHING_SERVICE = Symbol('HASHING_SERVICE');

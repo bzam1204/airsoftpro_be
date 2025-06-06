@@ -25,7 +25,7 @@ describe('Registrar Usuario por HTTP', function () {
       email : 'player1@test.com',
     };
     await request(app.getInstance())
-        .post('/account/user')
+        .post('/account')
         .send(userData)
         .expect(200)
         .expect(res => {
