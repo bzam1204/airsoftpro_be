@@ -1,16 +1,18 @@
 import {inject, injectable} from "tsyringe";
 
+import RegisterField from "@/application/use-cases/field/register-field";
 import EditField from "@/application/use-cases/field/edit-field";
 
 import Http from "@/infrastructure/http";
 
-import {EDIT_FIELD, HTTP} from "@/shared/constants/constants";
+import {EDIT_FIELD, HTTP, REGISTER_FIELD} from "@/shared/constants/constants";
 
 @injectable()
 export default class FieldController {
   private readonly PREFIX = '/field';
 
   constructor(
+      @inject(REGISTER_FIELD) readonly registerField: RegisterField,
       @inject(EDIT_FIELD) readonly editField: EditField,
       @inject(HTTP) readonly http: Http,
   ) {
@@ -18,6 +20,11 @@ export default class FieldController {
     http.on('put', `${this.PREFIX}/:id`, async function (params: {id: string}, body: EditFieldInputDto) {
       const id = params.id;
       const field = await editField.execute({id, ...body});
+      return {field};
+    });
+
+    http.on('post', this.PREFIX, async function (params: any, body: RegisterFieldInputDto) {
+      const field = await registerField.execute(body);
       return {field};
     });
 
@@ -30,6 +37,17 @@ interface EditFieldInputDto {
   description: string;
   coordinates?: string;
   address: string;
+  photos: string[];
+  rules: string;
+  name: string;
+}
+
+interface RegisterFieldInputDto {
+  infrastructure: string;
+  description: string;
+  coordinates?: string;
+  address: string;
+  adminId: string;
   photos: string[];
   rules: string;
   name: string;

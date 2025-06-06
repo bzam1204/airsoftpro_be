@@ -1,15 +1,20 @@
+import {inject, injectable} from "tsyringe";
+
 import FieldRepository from "@/domain/repositories/field-repository";
 import AdminRepository from "@/domain/repositories/admin-repository";
 import IdGenerator from "@/application/services/id-generator";
 import FieldDetails from "@/domain/entities/field-details";
 import Field from "@/domain/entities/field";
 
+import {ADMIN_REPOSITORY, FIELD_REPOSITORY, ID_GENERATOR} from "@/shared/constants/constants";
+
+@injectable()
 export default class RegisterField {
 
   constructor(
-      private readonly fieldRepository: FieldRepository,
-      private readonly adminRepository: AdminRepository,
-      private readonly idGenerator: IdGenerator,
+      @inject(FIELD_REPOSITORY) private readonly fieldRepository: FieldRepository,
+      @inject(ADMIN_REPOSITORY) private readonly adminRepository: AdminRepository,
+      @inject(ID_GENERATOR) private readonly idGenerator: IdGenerator,
   ) {
   }
 

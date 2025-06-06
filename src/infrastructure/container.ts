@@ -7,6 +7,7 @@ import CancelParticipation from "@/application/use-cases/game/cancel-participati
 import VerifyPlayerName from "@/application/use-cases/player/verify-player-name";
 import CreateFieldAdmin from "@/application/use-cases/field/create-field-admin";
 import ValidateToken from "@/application/use-cases/auth/validate-token";
+import RegisterField from "@/application/use-cases/field/register-field";
 import RefreshToken from "@/application/use-cases/auth/refresh-token";
 import RegisterUser from "@/application/use-cases/auth/register-user";
 import CreatePlayer from "@/application/use-cases/player/create-player";
@@ -23,6 +24,7 @@ import ReportRepositoryMemory from "@/infrastructure/repositories/report-reposit
 import PlayerRepositoryMemory from "@/infrastructure/repositories/player-repository-memory";
 import HashingServiceBcryptjs from "@/infrastructure/services/hashing-service-bcryptjs";
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
+import AdminRepositoryMemory from "@/infrastructure/repositories/admin-repository-memory";
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 import TokenProviderObject from "@/infrastructure/services/token-provider-object";
@@ -33,9 +35,10 @@ import JoinGame from "@/application/use-cases/game/join-game";
 container.register(Constants.FIELD_ADMIN_REPOSITORY, {useValue : new FieldAdminRepositoryMemory()});
 container.register(Constants.REPORT_REPOSITORY, {useValue : new ReportRepositoryMemory()});
 container.register(Constants.PLAYER_REPOSITORY, {useValue : new PlayerRepositoryMemory()});
+container.register(Constants.ADMIN_REPOSITORY, {useValue : new AdminRepositoryMemory()})
 container.register(Constants.FIELD_REPOSITORY, {useValue : new FieldRepositoryMemory()});
 container.register(Constants.GAME_REPOSITORY, {useValue : new GameRepositoryMemory()});
-container.register(Constants.USER_REPOSITORY, {useValue : new UserRepositoryMemory()})
+container.register(Constants.USER_REPOSITORY, {useValue : new UserRepositoryMemory()});
 
 container.register(Constants.HASHING_SERVICE, {useClass : HashingServiceBcryptjs});
 container.register(Constants.TOKEN_PROVIDER, {useClass : TokenProviderObject});
@@ -45,6 +48,7 @@ container.register(Constants.ADD_PLAYER_PARTICIPATION, {useClass : AddPlayerPart
 container.register(Constants.CANCEL_PARTICIPATION, {useClass : CancelParticipation});
 container.register(Constants.CREATE_FIELD_ADMIN, {useClass : CreateFieldAdmin});
 container.register(Constants.VERIFY_PLAYER_NAME, {useClass : VerifyPlayerName});
+container.register(Constants.REGISTER_FIELD, {useClass : RegisterField});
 container.register(Constants.VALIDATE_TOKEN, {useClass : ValidateToken});
 container.register(Constants.REGISTER_USER, {useClass : RegisterUser});
 container.register(Constants.CREATE_PLAYER, {useClass : CreatePlayer});
