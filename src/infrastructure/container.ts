@@ -27,6 +27,8 @@ import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
 import TokenProviderObject from "@/infrastructure/services/token-provider-object";
 import UUIDGenerator from "@/infrastructure/services/id-generator";
+import FinishGame from "@/application/use-cases/game/finish-game";
+import JoinGame from "@/application/use-cases/game/join-game";
 
 container.register(Constants.FIELD_ADMIN_REPOSITORY, {useValue : new FieldAdminRepositoryMemory()});
 container.register(Constants.REPORT_REPOSITORY, {useValue : new ReportRepositoryMemory()});
@@ -50,6 +52,8 @@ container.register(Constants.REFRESH_TOKEN, {useClass : RefreshToken});
 container.register(Constants.CREATE_REPORT, {useClass : CreateReport});
 container.register(Constants.CREATE_USER, {useClass : CreateUser});
 container.register(Constants.CANCEL_GAME, {useClass : CancelGame});
+container.register(Constants.FINISH_GAME, {useClass : FinishGame});
+container.register(Constants.JOIN_GAME, {useClass : JoinGame});
 container.register(Constants.CREATE_GAME, {useClass : CreateGame});
 container.register(Constants.EDIT_FIELD, {useClass : EditField});
 container.register(Constants.EDIT_GAME, {useClass : EditGame});
