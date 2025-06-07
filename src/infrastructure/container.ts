@@ -31,6 +31,7 @@ import TokenProviderObject from "@/infrastructure/services/token-provider-object
 import UUIDGenerator from "@/infrastructure/services/id-generator";
 import FinishGame from "@/application/use-cases/game/finish-game";
 import JoinGame from "@/application/use-cases/game/join-game";
+import JwtService from "@/infrastructure/services/jwt-service";
 
 container.register(Constants.FIELD_ADMIN_REPOSITORY, {useValue : new FieldAdminRepositoryMemory()});
 container.register(Constants.REPORT_REPOSITORY, {useValue : new ReportRepositoryMemory()});
@@ -41,7 +42,7 @@ container.register(Constants.GAME_REPOSITORY, {useValue : new GameRepositoryMemo
 container.register(Constants.USER_REPOSITORY, {useValue : new UserRepositoryMemory()});
 
 container.register(Constants.HASHING_SERVICE, {useClass : HashingServiceBcryptjs});
-container.register(Constants.TOKEN_PROVIDER, {useClass : TokenProviderObject});
+container.register(Constants.TOKEN_PROVIDER, {useClass : JwtService});
 container.register(Constants.ID_GENERATOR, {useClass : UUIDGenerator});
 
 container.register(Constants.ADD_PLAYER_PARTICIPATION, {useClass : AddPlayerParticipation});
