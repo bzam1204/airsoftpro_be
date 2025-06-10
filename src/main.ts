@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import AccountController from "@/infrastructure/controllers/account-controller";
 import PlayerController from "@/infrastructure/controllers/player-controller";
 import ReportController from "@/infrastructure/controllers/report-controller";
-import FieldController from "@/infrastructure/controllers/field-cotntroller";
+import FieldController from "@/infrastructure/controllers/field-controller";
 import AuthController from "@/infrastructure/controllers/auth-controller";
 import GameController from "@/infrastructure/controllers/game-controller";
 import ExpressAdapter from "@/infrastructure/express-adapter";
@@ -13,7 +13,7 @@ import {HTTP} from "@/shared/constants/constants";
 
 const app = new ExpressAdapter();
 
-container.register(HTTP, {useValue : app});
+container.register(HTTP, {useValue: app});
 container.resolve(AccountController);
 container.resolve(PlayerController);
 container.resolve(ReportController);

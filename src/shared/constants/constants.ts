@@ -26,6 +26,14 @@ export const EDIT_FIELD = Symbol('EDIT_FIELD');
 export const EDIT_GAME = Symbol('EDIT_GAME');
 export const LOGIN = Symbol('LOGIN');
 
+// New view use cases
+export const VIEW_GAME_LIST = Symbol('VIEW_GAME_LIST');
+export const VIEW_GAME = Symbol('VIEW_GAME');
+export const VIEW_GIVEN_REPORTS_HISTORY = Symbol('VIEW_GIVEN_REPORTS_HISTORY');
+export const VIEW_RECEIVED_REPORTS_HISTORY = Symbol('VIEW_RECEIVED_REPORTS_HISTORY');
+export const VIEW_FIELD_LIST = Symbol('VIEW_FIELD_LIST');
+export const VIEW_FIELD = Symbol('VIEW_FIELD');
+
 export const HASHING_SERVICE = Symbol('HASHING_SERVICE');
 export const TOKEN_PROVIDER = Symbol('TOKEN_PROVIDER');
 export const ID_GENERATOR = Symbol('ID_GENERATOR');
@@ -34,3 +42,6 @@ export const HTTP = Symbol('HTTP');
 
 export const FIELD_CONTROLLER = Symbol('FIELD_CONTROLLER');
 export const AUTH_CONTROLLER = Symbol('AUTH_CONTROLLER');
+export const GAME_CONTROLLER = Symbol('GAME_CONTROLLER');
+export const PLAYER_CONTROLLER = Symbol('PLAYER_CONTROLLER');
+export const REPORT_CONTROLLER = Symbol('REPORT_CONTROLLER');
