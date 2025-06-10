@@ -18,6 +18,12 @@ import CreateGame from "@/application/use-cases/game/create-game";
 import EditField from "@/application/use-cases/field/edit-field";
 import EditGame from "@/application/use-cases/game/edit-game";
 import Login from "@/application/use-cases/auth/login";
+import ViewGameList from "@/application/use-cases/game/view-game-list";
+import ViewGame from "@/application/use-cases/game/view-game";
+import ViewFieldList from "@/application/use-cases/field/view-field-list";
+import ViewField from "@/application/use-cases/field/view-field";
+import ViewGivenReportsHistory from "@/application/use-cases/report/view-given-reports-history";
+import ViewReceivedReportsHistory from "@/application/use-cases/report/view-received-reports-history";
 
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
 import ReportRepositoryMemory from "@/infrastructure/repositories/report-repository-memory";
@@ -64,5 +70,11 @@ container.register(Constants.START_GAME, {useClass : StartGame});
 container.register(Constants.JOIN_GAME, {useClass : JoinGame});
 container.register(Constants.EDIT_GAME, {useClass : EditGame});
 container.register(Constants.LOGIN, {useClass : Login});
+container.register(Constants.VIEW_GAME_LIST, {useClass: ViewGameList});
+container.register(Constants.VIEW_GAME, {useClass: ViewGame});
+container.register(Constants.VIEW_FIELD_LIST, {useClass: ViewFieldList});
+container.register(Constants.VIEW_FIELD, {useClass: ViewField});
+container.register(Constants.VIEW_GIVEN_REPORTS_HISTORY, {useClass: ViewGivenReportsHistory});
+container.register(Constants.VIEW_RECEIVED_REPORTS_HISTORY, {useClass: ViewReceivedReportsHistory});
 
 export default container;

@@ -1,29 +1,25 @@
 import {inject, injectable} from "tsyringe";
 
-import CancelParticipation from "@/application/use-cases/game/cancel-participation";
-import AddPlayerParticipation from "@/application/use-cases/game/add-player-participation";
-
 import Http from "@/infrastructure/http";
+import CreateReport from "@/application/use-cases/report/create-report";
+// ReportMotivation might be needed if any validation happens here, but DTO uses string
+// import ReportMotivation from "@/domain/enums/report-motivation";
 
 import {
-  ADD_PLAYER_PARTICIPATION, CREATE_PLAYER,
   HTTP,
-  CANCEL_PARTICIPATION, CREATE_REPORT
+  CREATE_REPORT
 } from "@/shared/constants/constants";
-import CreatePlayer from "@/application/use-cases/player/create-player";
-import CreateReport from "@/application/use-cases/report/create-report";
-import ReportMotivation from "@/domain/enums/report-motivation";
 
 @injectable()
 export default class ReportController {
-  private readonly PREFIX = '/report';
+  private readonly PREFIX = '/reports';
 
   constructor(
       @inject(CREATE_REPORT) readonly createReport: CreateReport,
       @inject(HTTP) readonly http: Http,
   ) {
 
-    http.on('post', this.PREFIX, async function (params: any, body: CreateReportInputDto) {
+    http.on('post', this.PREFIX, async function (params: any, body: CreateReportDto) {
       const report = await createReport.execute(body);
       return {report};
     });
@@ -32,9 +28,10 @@ export default class ReportController {
 
 };
 
-interface CreateReportInputDto {
-  motivation: ReportMotivation;
+interface CreateReportDto {
+  motivation: string; // ReportMotivation enum will be a string in DTO
   gameId: string;
   from: string;
   to: string;
+  description?: string;
 }

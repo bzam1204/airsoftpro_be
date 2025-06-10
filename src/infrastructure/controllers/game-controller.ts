@@ -7,10 +7,27 @@ import StartGame from "@/application/use-cases/game/start-game";
 import EditGame from "@/application/use-cases/game/edit-game";
 import JoinGame from "@/application/use-cases/game/join-game";
 import Login from "@/application/use-cases/auth/login";
+import AddPlayerParticipation from "@/application/use-cases/game/add-player-participation";
+import CancelParticipation from "@/application/use-cases/game/cancel-participation";
+import ViewGameList from "@/application/use-cases/game/view-game-list";
+import ViewGame from "@/application/use-cases/game/view-game";
 
 import Http from "@/infrastructure/http";
 
-import {CANCEL_GAME, CREATE_GAME, EDIT_GAME, FINISH_GAME, HTTP, JOIN_GAME, LOGIN, START_GAME} from "@/shared/constants/constants";
+import {
+  ADD_PLAYER_PARTICIPATION,
+  CANCEL_GAME,
+  CANCEL_PARTICIPATION,
+  CREATE_GAME,
+  EDIT_GAME,
+  FINISH_GAME,
+  HTTP,
+  JOIN_GAME,
+  LOGIN,
+  START_GAME,
+  VIEW_GAME,
+  VIEW_GAME_LIST
+} from "@/shared/constants/constants";
 
 @injectable()
 export default class GameController {
@@ -24,6 +41,10 @@ export default class GameController {
       @inject(EDIT_GAME) readonly editGame: EditGame,
       @inject(JOIN_GAME) readonly joinGame: JoinGame,
       @inject(LOGIN) readonly login: Login,
+      @inject(ADD_PLAYER_PARTICIPATION) readonly addPlayerParticipation: AddPlayerParticipation,
+      @inject(CANCEL_PARTICIPATION) readonly cancelParticipation: CancelParticipation,
+      @inject(VIEW_GAME_LIST) readonly viewGameList: ViewGameList,
+      @inject(VIEW_GAME) readonly viewGame: ViewGame,
       @inject(HTTP) readonly http: Http,
   ) {
 
@@ -67,6 +88,31 @@ export default class GameController {
       return {game};
     });
 
+    http.on('post', `${this.PREFIX}/:gameId/participation`, async function (params: {gameId: string}, body: AddPlayerParticipationDto) {
+      const gameId = params.gameId;
+      const playerId = body.playerId;
+      const game = await addPlayerParticipation.execute(gameId, playerId);
+      return {game};
+    });
+
+    http.on('delete', `${this.PREFIX}/:gameId/participation/:playerId`, async function (params: {gameId: string, playerId: string}, body: any) {
+      const gameId = params.gameId;
+      const playerId = params.playerId;
+      const game = await cancelParticipation.execute(gameId, playerId);
+      return {game};
+    });
+
+    http.on('get', `${this.PREFIX}s`, async function () {
+      const games = await viewGameList.execute();
+      return games;
+    });
+
+    http.on('get', `${this.PREFIX}/:gameId`, async function (params: {gameId: string}) {
+      const gameId = params.gameId;
+      const game = await viewGame.execute(gameId);
+      return {game};
+    });
+
   };
 
 };
@@ -96,5 +142,9 @@ interface EditGameInputDto {
 }
 
 interface JoinGameInputDto {
+  playerId: string;
+}
+
+interface AddPlayerParticipationDto {
   playerId: string;
 }
