@@ -1,10 +1,12 @@
-import http from "node:http";
 import {Express} from "express";
+import http from "node:http";
 
 export default interface Http {
-  on(method: string, path: string, callback: Function): void;
+    on(method: string, path: string, callback: Function): void;
 
-  getInstance(): Express;
+    route(method: string, path: string, callback: Function): void;
 
-  listen(port: number, callback?: (error?: Error) => void): http.Server;
+    getInstance(): Express;
+
+    listen(port: number, callback?: (error?: Error) => void): http.Server;
 };

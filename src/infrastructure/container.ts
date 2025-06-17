@@ -15,8 +15,10 @@ import CreateReport from "@/application/use-cases/report/create-report";
 import CreateUser from "@/application/use-cases/auth/create-user";
 import CancelGame from "@/application/use-cases/game/cancel-game";
 import CreateGame from "@/application/use-cases/game/create-game";
+import FinishGame from "@/application/use-cases/game/finish-game";
 import EditField from "@/application/use-cases/field/edit-field";
 import EditGame from "@/application/use-cases/game/edit-game";
+import JoinGame from "@/application/use-cases/game/join-game";
 import Login from "@/application/use-cases/auth/login";
 
 import FieldAdminRepositoryMemory from "@/infrastructure/repositories/field-admin-repository-memory";
@@ -27,10 +29,7 @@ import FieldRepositoryMemory from "@/infrastructure/repositories/field-repositor
 import AdminRepositoryMemory from "@/infrastructure/repositories/admin-repository-memory";
 import GameRepositoryMemory from "@/infrastructure/repositories/game-repository-memory";
 import UserRepositoryMemory from "@/infrastructure/repositories/user-repository-memory";
-import TokenProviderObject from "@/infrastructure/services/token-provider-object";
 import UUIDGenerator from "@/infrastructure/services/id-generator";
-import FinishGame from "@/application/use-cases/game/finish-game";
-import JoinGame from "@/application/use-cases/game/join-game";
 import JwtService from "@/infrastructure/services/jwt-service";
 
 container.register(Constants.FIELD_ADMIN_REPOSITORY, {useValue : new FieldAdminRepositoryMemory()});
