@@ -9,8 +9,9 @@ import StartGame from "@/application/use-cases/game/start-game";
 import EditGame from "@/application/use-cases/game/edit-game";
 import JoinGame from "@/application/use-cases/game/join-game";
 import ViewGame from "@/application/use-cases/game/view-game";
-import {CreateGameInputDto} from "@/infrastructure/dtos/create-game-dto";
+
 import {EditGameInputDto, EditGameOutputDto} from "@/infrastructure/dtos/edit-game-dto";
+import {CreateGameInputDto} from "@/infrastructure/dtos/create-game-dto";
 import {JoinGameInputDto} from "@/infrastructure/dtos/join-game-dto";
 import GameMapper from "@/infrastructure/mappers/game.mapper";
 import TokenGuard from "@/infrastructure/token-guard";
@@ -26,7 +27,6 @@ import {
     START_GAME,
     VIEW_GAME,
     EDIT_GAME,
-    LOGIN,
     HTTP,
 } from "@/shared/constants/constants";
 
@@ -35,35 +35,41 @@ export default class GameController {
     private readonly PREFIX = '/game';
 
     constructor(
-        @inject(VIEW_GAME_LIST) readonly viewGameList: ViewGameList,
+        @inject(VIEW_GAME_LIST) private readonly _viewGameList: ViewGameList,
         @inject(FINISH_GAME) private readonly _finishGame: FinishGame,
         @inject(CANCEL_GAME) private readonly _cancelGame: CancelGame,
         @inject(CREATE_GAME) private readonly _createGame: CreateGame,
-        @inject(START_GAME) readonly startGame: StartGame,
+        @inject(START_GAME) private readonly _startGame: StartGame,
         @inject(EDIT_GAME) private readonly _editGame: EditGame,
-        @inject(VIEW_GAME) readonly viewGame: ViewGame,
+        @inject(VIEW_GAME) private readonly _viewGame: ViewGame,
         @inject(JOIN_GAME) private readonly _joinGame: JoinGame,
         @inject(HTTP) private readonly _http: Http,
     ) {
-        this._http.on('get', this.PREFIX, async function () {
-            const games = await viewGameList.execute();
-            return {games};
-        });
-        this._http.on('get', `${this.PREFIX}/:id`, async function (params: { id: string }, body: any) {
-            const gameId = params.id;
-            const game = await viewGame.execute(gameId);
-            return {game};
-        });
-        this._http.on('post', `${this.PREFIX}/:id/start`, async function (params: { id: string }) {
-            const gameId = params.id;
-            const game = await startGame.execute(gameId);
-            return {game};
-        });
         this._http.route('delete', `${this.PREFIX}/:id`, this.cancelGame.bind(this));
         this._http.route('post', `${this.PREFIX}/:id/finish`, this.finishGame.bind(this));
+        this._http.route('post', `${this.PREFIX}/:id/start`, this.startGame.bind(this));
         this._http.route('post', this.PREFIX, this.createGame.bind(this));
         this._http.route('post', `${this.PREFIX}/:id/join`, this.joinGame.bind(this));
         this._http.route('put', `${this.PREFIX}/:id`, this.editGame.bind(this));
+        this._http.route('get', this.PREFIX, this.viewGameList.bind(this));
+        this._http.route('get', `${this.PREFIX}/:id`, this.viewGame.bind(this));
+    };
+
+    async viewGameList() {
+        const games = await this._viewGameList.execute();
+        return {games};
+    };
+
+    async viewGame(request: Request) {
+        const gameId = request.params.id;
+        const game = await this._viewGame.execute(gameId);
+        return {game};
+    };
+
+    async startGame(request: Request) {
+        const gameId = request.params.id;
+        const game = await this._startGame.execute(gameId);
+        return {game};
     };
 
     async finishGame(request: Request) {
