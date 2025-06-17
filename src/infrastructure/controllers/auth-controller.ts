@@ -1,63 +1,22 @@
 import {inject, injectable} from "tsyringe";
-import RefreshToken from "@/application/use-cases/auth/refresh-token";
-import Login from "@/application/use-cases/auth/login";
-import Http from "@/infrastructure/http";
-import {HTTP, LOGIN, REFRESH_TOKEN} from "@/shared/constants/constants";
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     LoginInput:
- *       type: object
- *       required:
- *         - email
- *         - password
- *       properties:
- *         email:
- *           type: string
- *           format: email
- *           description: User's email address
- *         password:
- *           type: string
- *           format: password
- *           description: User's password
- *     LoginResponse:
- *       type: object
- *       properties:
- *         accessToken:
- *           type: string
- *           description: JWT access token
- *         refreshToken:
- *           type: string
- *           description: JWT refresh token for obtaining new access tokens
- *     RefreshTokenInput:
- *       type: object
- *       required:
- *         - token
- *       properties:
- *         token:
- *           type: string
- *           description: Refresh token obtained from login
- *     RefreshTokenResponse:
- *       type: object
- *       properties:
- *         accessToken:
- *           type: string
- *           description: New JWT access token
- *         refreshToken:
- *           type: string
- *           description: New JWT refresh token
- */
+import RefreshToken from "@/application/use-cases/auth/refresh-token";
+import ValidateToken from "@/application/use-cases/auth/validate-token";
+import Login from "@/application/use-cases/auth/login";
+
+import Http from "@/infrastructure/http";
+
+import {HTTP, LOGIN, REFRESH_TOKEN, VALIDATE_TOKEN} from "@/shared/constants/constants";
 
 @injectable()
 export default class AuthController {
   private readonly PREFIX = '/auth';
 
   constructor(
-    @inject(REFRESH_TOKEN) readonly refreshToken: RefreshToken,
-    @inject(LOGIN) readonly login: Login,
-    @inject(HTTP) readonly http: Http,
+      @inject(REFRESH_TOKEN) readonly refreshToken: RefreshToken,
+      @inject(VALIDATE_TOKEN) readonly validateToken: ValidateToken,
+      @inject(LOGIN) readonly login: Login,
+      @inject(HTTP) readonly http: Http,
   ) {
     /**
      * @swagger
@@ -90,7 +49,7 @@ export default class AuthController {
       const {accessToken, refreshToken} = await login.execute({email, password});
       return {accessToken, refreshToken};
     });
-    
+
     /**
      * @swagger
      * /auth/refresh-token:
@@ -118,5 +77,12 @@ export default class AuthController {
     http.on('post', `${this.PREFIX}/refresh-token`, async function (params: any, body: {token: string}) {
       return await refreshToken.execute(body.token);
     });
-  }
-}
+
+    http.on('post', `${this.PREFIX}/validate-token`, async function (params: any, body: {token: string}) {
+      const valid = await validateToken.execute(body.token);
+      return {valid};
+    });
+
+  };
+
+};

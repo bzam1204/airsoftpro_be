@@ -1,12 +1,14 @@
 import {inject, injectable} from "tsyringe";
 import {Request} from "express";
 
+import ViewGameList from "@/application/use-cases/game/view-game-list";
 import CancelGame from "@/application/use-cases/game/cancel-game";
 import CreateGame from "@/application/use-cases/game/create-game";
 import FinishGame from "@/application/use-cases/game/finish-game";
+import StartGame from "@/application/use-cases/game/start-game";
 import EditGame from "@/application/use-cases/game/edit-game";
 import JoinGame from "@/application/use-cases/game/join-game";
-
+import ViewGame from "@/application/use-cases/game/view-game";
 import {CreateGameInputDto} from "@/infrastructure/dtos/create-game-dto";
 import {EditGameInputDto, EditGameOutputDto} from "@/infrastructure/dtos/edit-game-dto";
 import {JoinGameInputDto} from "@/infrastructure/dtos/join-game-dto";
@@ -15,20 +17,48 @@ import TokenGuard from "@/infrastructure/token-guard";
 import UseGuards from "@/infrastructure/use-guards";
 import Http from "@/infrastructure/http";
 
-import {CANCEL_GAME, CREATE_GAME, EDIT_GAME, FINISH_GAME, HTTP, JOIN_GAME} from "@/shared/constants/constants";
+import {
+    VIEW_GAME_LIST,
+    CANCEL_GAME,
+    CREATE_GAME,
+    FINISH_GAME,
+    JOIN_GAME,
+    START_GAME,
+    VIEW_GAME,
+    EDIT_GAME,
+    LOGIN,
+    HTTP,
+} from "@/shared/constants/constants";
 
 @injectable()
 export default class GameController {
     private readonly PREFIX = '/game';
 
     constructor(
+        @inject(VIEW_GAME_LIST) readonly viewGameList: ViewGameList,
         @inject(FINISH_GAME) private readonly _finishGame: FinishGame,
         @inject(CANCEL_GAME) private readonly _cancelGame: CancelGame,
         @inject(CREATE_GAME) private readonly _createGame: CreateGame,
+        @inject(START_GAME) readonly startGame: StartGame,
         @inject(EDIT_GAME) private readonly _editGame: EditGame,
+        @inject(VIEW_GAME) readonly viewGame: ViewGame,
         @inject(JOIN_GAME) private readonly _joinGame: JoinGame,
         @inject(HTTP) private readonly _http: Http,
     ) {
+        this._http.on('get', this.PREFIX, async function () {
+            const games = await viewGameList.execute();
+            return {games};
+        });
+        this._http.on('get', `${this.PREFIX}/:id`, async function (params: { id: string }, body: any) {
+            const gameId = params.id;
+            const game = await viewGame.execute(gameId);
+            return {game};
+        });
+        this._http.on('post', `${this.PREFIX}/:id/start`, async function (params: { id: string }) {
+            const gameId = params.id;
+            const game = await startGame.execute(gameId);
+            return {game};
+        });
         this._http.route('delete', `${this.PREFIX}/:id`, this.cancelGame.bind(this));
         this._http.route('post', `${this.PREFIX}/:id/finish`, this.finishGame.bind(this));
         this._http.route('post', this.PREFIX, this.createGame.bind(this));

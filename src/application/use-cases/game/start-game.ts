@@ -1,8 +1,15 @@
+import {inject, injectable} from "tsyringe";
+
 import GameRepository from "@/domain/repositories/game-repository";
 
+import {GAME_REPOSITORY} from "@/shared/constants/constants";
+
+@injectable()
 export default class StartGame {
 
-  constructor(private readonly gameRepository: GameRepository) {
+  constructor(
+      @inject(GAME_REPOSITORY) private readonly gameRepository: GameRepository
+  ) {
   }
 
   async execute(gameId: string) {

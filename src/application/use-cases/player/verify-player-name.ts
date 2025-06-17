@@ -1,5 +1,7 @@
-import PlayerRepository from "@/domain/repositories/player-repository";
 import {inject, injectable} from "tsyringe";
+
+import PlayerRepository from "@/domain/repositories/player-repository";
+
 import {PLAYER_REPOSITORY} from "@/shared/constants/constants";
 
 @injectable()
