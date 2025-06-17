@@ -1,92 +1,76 @@
 import {inject, injectable} from "tsyringe";
+import {Request} from "express";
 
 import CancelGame from "@/application/use-cases/game/cancel-game";
 import CreateGame from "@/application/use-cases/game/create-game";
 import FinishGame from "@/application/use-cases/game/finish-game";
 import EditGame from "@/application/use-cases/game/edit-game";
 import JoinGame from "@/application/use-cases/game/join-game";
-import Login from "@/application/use-cases/auth/login";
 
+import {CreateGameInputDto} from "@/infrastructure/dtos/create-game-dto";
+import {EditGameInputDto, EditGameOutputDto} from "@/infrastructure/dtos/edit-game-dto";
+import {JoinGameInputDto} from "@/infrastructure/dtos/join-game-dto";
+import GameMapper from "@/infrastructure/mappers/game.mapper";
+import TokenGuard from "@/infrastructure/token-guard";
+import UseGuards from "@/infrastructure/use-guards";
 import Http from "@/infrastructure/http";
 
-import {CANCEL_GAME, CREATE_GAME, EDIT_GAME, FINISH_GAME, HTTP, JOIN_GAME, LOGIN} from "@/shared/constants/constants";
+import {CANCEL_GAME, CREATE_GAME, EDIT_GAME, FINISH_GAME, HTTP, JOIN_GAME} from "@/shared/constants/constants";
 
 @injectable()
 export default class GameController {
-  private readonly PREFIX = '/game';
+    private readonly PREFIX = '/game';
 
-  constructor(
-      @inject(FINISH_GAME) readonly finishGame: FinishGame,
-      @inject(CANCEL_GAME) readonly cancelGame: CancelGame,
-      @inject(CREATE_GAME) readonly createGame: CreateGame,
-      @inject(EDIT_GAME) readonly editGame: EditGame,
-      @inject(JOIN_GAME) readonly joinGame: JoinGame,
-      @inject(LOGIN) readonly login: Login,
-      @inject(HTTP) readonly http: Http,
-  ) {
+    constructor(
+        @inject(FINISH_GAME) private readonly _finishGame: FinishGame,
+        @inject(CANCEL_GAME) private readonly _cancelGame: CancelGame,
+        @inject(CREATE_GAME) private readonly _createGame: CreateGame,
+        @inject(EDIT_GAME) private readonly _editGame: EditGame,
+        @inject(JOIN_GAME) private readonly _joinGame: JoinGame,
+        @inject(HTTP) private readonly _http: Http,
+    ) {
+        this._http.route('delete', `${this.PREFIX}/:id`, this.cancelGame.bind(this));
+        this._http.route('post', `${this.PREFIX}/:id/finish`, this.finishGame.bind(this));
+        this._http.route('post', this.PREFIX, this.createGame.bind(this));
+        this._http.route('post', `${this.PREFIX}/:id/join`, this.joinGame.bind(this));
+        this._http.route('put', `${this.PREFIX}/:id`, this.editGame.bind(this));
+    };
 
-    http.on('post', `${this.PREFIX}/:id/finish`, async function (params: {id: string}, body: any) {
-      const gameId = params.id;
-      const game = await finishGame.execute(gameId);
-      return {game};
-    });
+    async finishGame(request: Request) {
+        const gameId = request.params.id;
+        const game = await this._finishGame.execute(gameId);
+        return {game};
+    };
 
-    http.on('delete', `${this.PREFIX}/:id`, async function (params: {id: string}, body: any) {
-      const gameId = params.id;
-      const game = await cancelGame.execute(gameId);
-      return {game};
-    });
+    async cancelGame(request: Request) {
+        const gameId = request.params.id;
+        const game = await this._cancelGame.execute(gameId);
+        return {game};
+    };
 
-    http.on('put', `${this.PREFIX}/:id`, async function (params: {id: string}, body: EditGameInputDto) {
-      const id = params.id;
-      const game = await editGame.execute({
-        ...body,
-        id,
-        startDate : body.startDate ? new Date(body.startDate) : body.startDate,
-      });
-      return {game};
-    });
+    async editGame(request: Request): Promise<EditGameOutputDto> {
+        const id = request.params.id;
+        const requestInput: EditGameInputDto = request.body;
+        const useCaseInput = {
+            ...requestInput, id,
+            startDate: requestInput.startDate ? new Date(requestInput.startDate) : requestInput.startDate,
+        };
+        const game = await this._editGame.execute(useCaseInput);
+        return {game: GameMapper.toDto(game)};
+    };
 
-    http.on('post', this.PREFIX, async function (params: any, body: CreateGameInputDto) {
-      const game = createGame.execute({...body, startDate : new Date(body.startDate)});
-      return {game};
-    });
+    @UseGuards(TokenGuard)
+    async createGame(request: Request) {
+        const body: CreateGameInputDto = request.body;
+        const game = this._createGame.execute({...body, startDate: new Date(body.startDate)});
+        return {game};
+    };
 
-    http.on('post', `${this.PREFIX}/:id/join`, async function (params: {id: string}, body: JoinGameInputDto) {
-      const gameId = params.id;
-      const playerId = body.playerId;
-      const game = await joinGame.execute(gameId, playerId);
-      return {game};
-    });
-
-  };
+    async joinGame(request: Request) {
+        const gameId = request.params.id;
+        const {playerId}: JoinGameInputDto = request.body;
+        const game = await this._joinGame.execute(gameId, playerId);
+        return {game};
+    };
 
 };
-
-interface CreateGameInputDto {
-  specificRules?: string,
-  minHonorLevel: number,
-  playersLimit: number,
-  description?: string,
-  friendlyFire: boolean,
-  startDate: Date,
-  fpsLimit?: number,
-  gameMode: string,
-  fieldId: string,
-}
-
-interface EditGameInputDto {
-  specificRules?: string;
-  minHonorLevel?: number;
-  playersLimit?: number;
-  friendlyFire?: boolean;
-  description?: string;
-  startDate?: Date;
-  fpsLimit?: number;
-  gameMode?: string;
-  fieldId?: string;
-}
-
-interface JoinGameInputDto {
-  playerId: string;
-}

@@ -30,9 +30,6 @@ describe('Entrar no sistema por HTTP', function () {
       useValue : {
         signAccessToken : () => '123123',
         signRefreshToken : () => '321321',
-        verifyAccessToken : jest.fn(),
-        verifyRefreshToken : jest.fn(),
-        decode : jest.fn(),
       }
     });
     container.resolve(AuthController);

@@ -12,7 +12,6 @@ import container from "@/infrastructure/container";
 import {HTTP} from "@/shared/constants/constants";
 
 const app = new ExpressAdapter();
-
 container.register(HTTP, {useValue : app});
 container.resolve(AccountController);
 container.resolve(PlayerController);
@@ -21,4 +20,9 @@ container.resolve(FieldController);
 container.resolve(AuthController);
 container.resolve(GameController);
 
-app.listen(3000, () => console.log('AIRSOFTPRO ---- Server Online ---- AIRSOFTPRO'));
+const PORT = Number(process.env.PORT) || 3000;
+app.listen(PORT, () => {
+  console.log('AIRSOFTPRO ---- Server Online ---- AIRSOFTPRO');
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`API Documentation available at http://localhost:${PORT}/docs`);
+});

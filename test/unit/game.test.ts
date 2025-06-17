@@ -19,7 +19,7 @@ describe('Partida', function () {
       expect(() => new Game({
         ...gameProps,
         startDate : new Date(Date.now() - 1000 * 60)
-      })).toThrow('INVALID_START_DATE');
+      })).toThrow(Game.errorCodes.INVALID_START_DATE);
     });
 
   });
@@ -36,13 +36,13 @@ describe('Partida', function () {
       const game = new Game({...gameProps, gameRules : new GameRules({playersLimit : 2})});
       game.addPlayerParticipation("1");
       game.addPlayerParticipation("2");
-      expect(() => game.addPlayerParticipation("3")).toThrow('GAME_FULL')
+      expect(() => game.addPlayerParticipation("3")).toThrow(Game.errorCodes.GAME_FULL);
     });
 
     it("Não deve adicionar o mesmo jogador na partida", function () {
       const game = new Game(gameProps);
       game.addPlayerParticipation("1");
-      expect(() => game.addPlayerParticipation("1")).toThrow('PLAYER_ALREADY_IN_GAME')
+      expect(() => game.addPlayerParticipation("1")).toThrow(Game.errorCodes.PLAYER_ALREADY_IN_GAME);
     });
 
   });
@@ -58,7 +58,7 @@ describe('Partida', function () {
 
     it("Não deve remover um jogador que não esteja na partida", function () {
       const game = new Game(gameProps);
-      expect(() => game.removePlayer("1")).toThrow('PLAYER_NOT_IN_GAME');
+      expect(() => game.removePlayer("1")).toThrow(Game.errorCodes.PLAYER_NOT_IN_GAME);
     })
 
   });
@@ -75,12 +75,12 @@ describe('Partida', function () {
 
     it.each(Object.values(GameStatus).filter(p => p !== GameStatus.SCHEDULED))("Não deve iniciar uma partida cujo status seja diferente de SCHEDULED", function (status) {
       const game = new Game({...gameProps, status});
-      expect(() => game.start()).toThrow('GAME_NOT_IN_SCHEDULED_STATUS')
+      expect(() => game.start()).toThrow(Game.errorCodes.GAME_NOT_IN_SCHEDULED_STATUS);
     });
 
     it("Não deve iniciar uma partida com menos de 2 jogadores", function () {
       const game = new Game(gameProps);
-      expect(() => game.start()).toThrow('INSUFFICIENT_PLAYERS');
+      expect(() => game.start()).toThrow(Game.errorCodes.INSUFFICIENT_PLAYERS);
     });
 
   });
@@ -98,7 +98,7 @@ describe('Partida', function () {
 
     it.each(Object.values(GameStatus).filter(p => p !== GameStatus.STARTED))("Não deve finalizar uma partida que não esteja em andamento", function (status) {
       const game = new Game({...gameProps, status});
-      expect(() => game.finish()).toThrow('GAME_NOT_IN_PROGRESS');
+      expect(() => game.finish()).toThrow(Game.errorCodes.GAME_NOT_IN_PROGRESS);
     });
 
     it("Deve guardar a data e hora ao finalizar uma partida", async function () {
@@ -123,7 +123,7 @@ describe('Partida', function () {
 
     it.each(Object.values(GameStatus).filter(p => p !== GameStatus.STARTED && p !== GameStatus.SCHEDULED))("Não deve cancelar uma partida que não esteja agendada ou em andamento", function (status) {
       const game = new Game({...gameProps, status});
-      expect(() => game.cancel()).toThrow('INVALID_STATUS_TO_CANCEL');
+      expect(() => game.cancel()).toThrow(Game.errorCodes.INVALID_STATUS_TO_CANCEL);
     });
 
   });

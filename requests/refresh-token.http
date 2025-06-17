@@ -1,9 +1,9 @@
 ### Refresh Token
-POST http://localhost:3000/refresh-token
+POST http://localhost:3000/auth/refresh-token
 Content-Type: application/json
 
 {
-  "token": "{\"sub\":\"c9246ae5-c8ac-4887-a2b6-6e5aa1a4361e\",\"email\":\"gaby@airsoftpro.com\",\"playerName\":\"gabyludo\",\"roles\":[\"PLAYER\"],\"code\":\"321\"}"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjUyZDNjMS00NjIzLTQwOTItOWM0MS05YzJiZjI1NGQyMTIiLCJlbWFpbCI6ImdhYnlAYWlyc29mdHByby5jb20iLCJwbGF5ZXJOYW1lIjoiZ2FieWx1ZG8iLCJyb2xlcyI6WyJQTEFZRVIiXSwiaWF0IjoxNzQ5MjYxNTI3LCJleHAiOjE3NDk4NjYzMjd9.LH81YFGCn0-G5lsf9G1b1eoxWu0XUPV9NQiOtlIKYWQ"
 }
 
 ###

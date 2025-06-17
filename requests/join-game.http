@@ -1,0 +1,9 @@
+### Join Game
+POST http://localhost:3000/game/1/join
+Content-Type: application/json
+
+{
+  "playerId": "1"
+}
+
+###
