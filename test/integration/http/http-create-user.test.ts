@@ -12,7 +12,7 @@ describe('Criar Usuário por HTTP', function () {
   beforeAll(function () {
     app = new ExpressAdapter();
     container.register(HTTP, {useValue : app});
-    container.resolve(AccountController);
+    app.registerControllers([AccountController]);
   });
 
   it('Deve criar um usuário', async function () {

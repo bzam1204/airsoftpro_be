@@ -29,8 +29,10 @@ import {
     EDIT_GAME,
     HTTP,
 } from "@/shared/constants/constants";
+import Controller from '@/infrastructure/decorators/controller.decorator';
 
 @injectable()
+@Controller('/game')
 export default class GameController {
     private readonly PREFIX = '/game';
 
@@ -91,8 +93,8 @@ export default class GameController {
             ...requestInput, id,
             startDate: requestInput.startDate ? new Date(requestInput.startDate) : requestInput.startDate,
         };
-        const game = await this._editGame.execute(useCaseInput);
-        return {game: GameMapper.toDto(game)};
+        const game = GameMapper.toDto(await this._editGame.execute(useCaseInput));
+        return {game};
     };
 
     @UseGuards(TokenGuard)

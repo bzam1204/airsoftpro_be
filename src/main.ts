@@ -13,13 +13,7 @@ import {HTTP} from "@/shared/constants/constants";
 
 const app = new ExpressAdapter();
 container.register(HTTP, {useValue : app});
-container.resolve(AccountController);
-container.resolve(PlayerController);
-container.resolve(ReportController);
-container.resolve(FieldController);
-container.resolve(AuthController);
-container.resolve(GameController);
-
+app.registerControllers([AccountController, PlayerController, ReportController, FieldController, AuthController, GameController]);
 const PORT = Number(process.env.PORT) || 3000;
 app.listen(PORT, () => {
   console.log('AIRSOFTPRO ---- Server Online ---- AIRSOFTPRO');

@@ -1,0 +1,14 @@
+### Create Field Admin
+POST http://localhost:3000/account/field-admin
+Content-Type: application/json
+
+{
+  "playerName": "gabyludo",
+  "password": "123123",
+  "fullName": "gabrielly figueira",
+  "birth": "2000-09-21T08:00:00",
+  "photo": "",
+  "email": "gaby@airsoftpro.com"
+}
+
+###
