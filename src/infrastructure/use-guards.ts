@@ -1,7 +1,7 @@
-import {Request, Response, NextFunction} from "express";
+import {Request, Response, NextFunction} from 'express';
 
-import {CanActivateClass} from "@/infrastructure/can-activate-class";
-import ExpressExecutionContext from "@/infrastructure/express-execution-context";
+import {CanActivateClass} from '@/infrastructure/can-activate-class';
+import ExpressExecutionContext from '@/infrastructure/express-execution-context';
 
 export default function UseGuards(...guards: CanActivateClass[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {

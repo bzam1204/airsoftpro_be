@@ -1,19 +1,19 @@
-import {inject, injectable} from "tsyringe";
+import {inject, injectable} from 'tsyringe';
 
-import ReportMotivation from "@/domain/enums/report-motivation";
+import ReportMotivation from '@/domain/enums/report-motivation';
 
 import ViewReceivedReportsHistory from '@/application/use-cases/report/view-received-reports-history';
 import ViewGivenReportsHistory from '@/application/use-cases/report/view-given-reports-history';
 import CreateReport from '@/application/use-cases/report/create-report';
 
-import Http from "@/infrastructure/http";
+import Http from '@/infrastructure/http';
 
 import {
     VIEW_RECEIVED_REPORTS_HISTORY,
     VIEW_GIVEN_REPORTS_HISTORY,
     CREATE_REPORT,
     HTTP,
-} from "@/shared/constants/constants";
+} from '@/shared/constants/constants';
 
 @injectable()
 export default class ReportController {
@@ -26,13 +26,13 @@ export default class ReportController {
         @inject(HTTP) readonly http: Http,
     ) {
 
-        http.on('get', `${this.PREFIX}/given/:playerId`, async function (params: { playerId: string }, body: any) {
+        http.on('get', `${this.PREFIX}/given/:playerId`, async function (params: {playerId: string}, body: any) {
             const playerId = params.playerId;
             const reports = await viewGivenReportsHistory.execute(playerId);
             return {reports};
         });
 
-        http.on('get', `${this.PREFIX}/received/:playerId`, async function (params: { playerId: string }, body: any) {
+        http.on('get', `${this.PREFIX}/received/:playerId`, async function (params: {playerId: string}, body: any) {
             const playerId = params.playerId;
             const reports = await viewReceivedReportsHistory.execute(playerId);
             return {reports};

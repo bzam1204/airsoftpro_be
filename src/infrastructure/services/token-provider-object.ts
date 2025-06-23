@@ -1,33 +1,33 @@
-import TokenProvider from "@/application/services/token-provider";
+import TokenProvider from '@/application/services/token-provider';
 
-import {Payload} from "@/application/use-cases/auth/refresh-token";
-import {injectable} from "tsyringe";
+import {Payload} from '@/application/use-cases/auth/refresh-token';
+import {injectable} from 'tsyringe';
 
 @injectable()
 export default class TokenProviderObject implements TokenProvider {
-  private readonly refreshSecret = '321';
-  private readonly accessSecret = '123';
+    private readonly refreshSecret = '321';
+    private readonly accessSecret = '123';
 
-  signRefreshToken(payload: Payload): string {
-    return JSON.stringify({...payload, code : this.refreshSecret});
-  };
+    signRefreshToken(payload: Payload): string {
+        return JSON.stringify({...payload, code: this.refreshSecret});
+    };
 
-  signAccessToken(payload: Payload): string {
-    return JSON.stringify({...payload, code : this.accessSecret});
-  };
+    signAccessToken(payload: Payload): string {
+        return JSON.stringify({...payload, code: this.accessSecret});
+    };
 
-  verifyAccessToken(token: string): boolean {
-    const {code} = this.decode(token);
-    return this.accessSecret === code;
-  };
+    verifyAccessToken(token: string): boolean {
+        const {code} = this.decode(token);
+        return this.accessSecret === code;
+    };
 
-  verifyRefreshToken(token: string): boolean {
-    const {code} = this.decode(token);
-    return this.refreshSecret === code;
-  };
+    verifyRefreshToken(token: string): boolean {
+        const {code} = this.decode(token);
+        return this.refreshSecret === code;
+    };
 
-  decode(token: string): Payload & {code: string} {
-    return JSON.parse(token);
-  };
+    decode(token: string): Payload & {code: string} {
+        return JSON.parse(token);
+    };
 
 };

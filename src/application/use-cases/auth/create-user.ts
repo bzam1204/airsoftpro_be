@@ -1,12 +1,12 @@
-import {inject, injectable} from "tsyringe";
+import {inject, injectable} from 'tsyringe';
 
-import UserRepository from "@/domain/repositories/user-repository";
-import HashingService from "@/application/services/hashing-service";
-import IdGenerator from "@/application/services/id-generator";
+import UserRepository from '@/domain/repositories/user-repository';
+import HashingService from '@/application/services/hashing-service';
+import IdGenerator from '@/application/services/id-generator';
 
-import User from "@/domain/entities/user";
+import User from '@/domain/entities/user';
 
-import {HASHING_SERVICE, ID_GENERATOR, USER_REPOSITORY} from "@/shared/constants/constants";
+import {HASHING_SERVICE, ID_GENERATOR, USER_REPOSITORY} from '@/shared/constants/constants';
 
 @injectable()
 export default class CreateUser {
@@ -29,7 +29,7 @@ export default class CreateUser {
     };
 
     private async userAlreadyExists(email: string) {
-        return !!await this.userRepository.findByEmail(email)
+        return !!await this.userRepository.findByEmail(email);
     };
 
 };

@@ -15,7 +15,7 @@ describe('Visualizar Campo por HTTP', function () {
     let app: ExpressAdapter;
 
     beforeAll(function () {
-        app = new ExpressAdapter();
+        app = new ExpressAdapter(container);
         container.register(HTTP, {useValue: app});
         container.register(FIELD_REPOSITORY, {
             useValue: new FieldRepositoryMemory([

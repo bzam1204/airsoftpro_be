@@ -15,7 +15,7 @@ describe('Cancelar participação por HTTP', function () {
     let app: ExpressAdapter;
 
     beforeAll(function () {
-        app = new ExpressAdapter();
+        app = new ExpressAdapter(container);
         container.register(HTTP, {useValue: app});
         container.register(GAME_REPOSITORY, {
             useValue: new GameRepositoryMemory([new Game({

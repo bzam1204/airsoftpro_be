@@ -1,11 +1,11 @@
-import {inject, injectable} from "tsyringe";
+import {inject, injectable} from 'tsyringe';
 
-import AddPlayerParticipation from "@/application/use-cases/game/add-player-participation";
-import CancelParticipation from "@/application/use-cases/game/cancel-participation";
-import VerifyPlayerName from "@/application/use-cases/player/verify-player-name";
-import CreatePlayer from "@/application/use-cases/player/create-player";
+import AddPlayerParticipation from '@/application/use-cases/game/add-player-participation';
+import CancelParticipation from '@/application/use-cases/game/cancel-participation';
+import VerifyPlayerName from '@/application/use-cases/player/verify-player-name';
+import CreatePlayer from '@/application/use-cases/player/create-player';
 
-import Http from "@/infrastructure/http";
+import Http from '@/infrastructure/http';
 
 import {
     ADD_PLAYER_PARTICIPATION,
@@ -13,7 +13,7 @@ import {
     VERIFY_PLAYER_NAME,
     CREATE_PLAYER,
     HTTP,
-} from "@/shared/constants/constants";
+} from '@/shared/constants/constants';
 
 @injectable()
 export default class PlayerController {
@@ -26,7 +26,7 @@ export default class PlayerController {
         @inject(CREATE_PLAYER) readonly createPlayer: CreatePlayer,
         @inject(HTTP) readonly http: Http,
     ) {
-        http.on('get', `${this.PREFIX}/verify-name/:name`, async function (params: { name: string }) {
+        http.on('get', `${this.PREFIX}/verify-name/:name`, async function (params: {name: string}) {
             const name = params.name;
             const available = await verifyPlayerName.execute(name);
             return {available};

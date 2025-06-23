@@ -1,11 +1,11 @@
-import Field from "@/domain/entities/field";
+import Field from '@/domain/entities/field';
 
 export default interface FieldRepository {
-  findAll(): Promise<Field[]>;
+    findAll(): Promise<Field[]>;
 
-  findById(fieldId: string): Promise<Field | null>;
+    findById(fieldId: string): Promise<Field | null>;
 
-  create(field: Field): Promise<Field>;
-  
-  update(field: Field): Promise<Field>;
+    create(field: Field): Promise<Field>;
+
+    update(field: Field): Promise<Field>;
 }

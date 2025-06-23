@@ -1,11 +1,11 @@
-import {inject, injectable} from "tsyringe";
+import {inject, injectable} from 'tsyringe';
 
-import RegisterField from "@/application/use-cases/field/register-field";
-import ViewFieldList from "@/application/use-cases/field/view-field-list";
-import EditField from "@/application/use-cases/field/edit-field";
-import ViewField from "@/application/use-cases/field/view-field";
+import RegisterField from '@/application/use-cases/field/register-field';
+import ViewFieldList from '@/application/use-cases/field/view-field-list';
+import EditField from '@/application/use-cases/field/edit-field';
+import ViewField from '@/application/use-cases/field/view-field';
 
-import Http from "@/infrastructure/http";
+import Http from '@/infrastructure/http';
 
 import {
     REGISTER_FIELD,
@@ -13,7 +13,7 @@ import {
     EDIT_FIELD,
     VIEW_FIELD,
     HTTP,
-} from "@/shared/constants/constants";
+} from '@/shared/constants/constants';
 
 @injectable()
 export default class FieldController {
@@ -32,7 +32,7 @@ export default class FieldController {
             return {fields};
         });
 
-        http.on('get', `${this.PREFIX}/:id`, async function (params: { id: string }, body: any) {
+        http.on('get', `${this.PREFIX}/:id`, async function (params: {id: string}, body: any) {
             const fieldId = params.id;
             const field = await viewField.execute(fieldId);
             return {field};
@@ -43,7 +43,7 @@ export default class FieldController {
             return {field};
         });
 
-        http.on('put', `${this.PREFIX}/:id`, async function (params: { id: string }, body: EditFieldInputDto) {
+        http.on('put', `${this.PREFIX}/:id`, async function (params: {id: string}, body: EditFieldInputDto) {
             const id = params.id;
             const field = await editField.execute({...body, id});
             return {field};

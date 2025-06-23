@@ -1,13 +1,13 @@
-import Game from "@/domain/entities/game";
+import Game from '@/domain/entities/game';
 
 export default interface GameRepository {
-  search(input: {playerId: string; date: Date;}): Promise<Game[]>;
+    search(input: {playerId: string; date: Date;}): Promise<Game[]>;
 
-  findById(gameId: string): Promise<Game | null>;
+    findById(gameId: string): Promise<Game | null>;
 
-  findAll(): Promise<Game[]>;
+    findAll(): Promise<Game[]>;
 
-  create(game: Game): Promise<Game>;
+    create(game: Game): Promise<Game>;
 
-  update(game: Game): Promise<Game>;
+    update(game: Game): Promise<Game>;
 }

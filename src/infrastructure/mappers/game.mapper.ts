@@ -1,4 +1,4 @@
-import Entity from "@/domain/entities/game";
+import Entity from '@/domain/entities/game';
 
 export default class GameMapper {
     public static toDto(entity: Entity) {

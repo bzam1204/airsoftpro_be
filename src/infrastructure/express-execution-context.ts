@@ -1,6 +1,6 @@
-import {Request, Response} from "express";
+import {Request, Response} from 'express';
 
-import {ExecutionContext} from "@/infrastructure/execution-context";
+import {ExecutionContext} from '@/infrastructure/execution-context';
 
 export default class ExpressExecutionContext implements ExecutionContext<Request, Response> {
 

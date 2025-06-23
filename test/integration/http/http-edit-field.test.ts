@@ -1,6 +1,6 @@
 import request from 'supertest';
 
-import FieldController from "@/infrastructure/controllers/field-cotntroller";
+import FieldController from "@/infrastructure/controllers/field-controller";
 import ExpressAdapter from "@/infrastructure/express-adapter";
 import container from "@/infrastructure/container";
 
@@ -10,7 +10,7 @@ describe('Editar Campo por HTTP', function () {
   let app: ExpressAdapter;
 
   beforeAll(function () {
-    app = new ExpressAdapter();
+    app = new ExpressAdapter(container);
     container.register(HTTP, {useValue : app});
     container.resolve(FieldController);
   });

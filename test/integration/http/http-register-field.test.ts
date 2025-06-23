@@ -4,7 +4,7 @@ import Admin from "@/domain/entities/admin";
 
 import FieldRepositoryMemory from "@/infrastructure/repositories/field-repository-memory";
 import AdminRepositoryMemory from "@/infrastructure/repositories/admin-repository-memory";
-import FieldController from "@/infrastructure/controllers/field-cotntroller";
+import FieldController from "@/infrastructure/controllers/field-controller";
 import ExpressAdapter from "@/infrastructure/express-adapter";
 
 import container from "@/infrastructure/container";
@@ -15,7 +15,7 @@ describe('Registrar Campo por HTTP', function () {
   let app: ExpressAdapter;
 
   beforeAll(function () {
-    app = new ExpressAdapter();
+    app = new ExpressAdapter(container);
     container.register(HTTP, {useValue : app});
     container.register(ADMIN_REPOSITORY, {
       useValue : new AdminRepositoryMemory([new Admin({name : 'Admin 1', id : '1'})])

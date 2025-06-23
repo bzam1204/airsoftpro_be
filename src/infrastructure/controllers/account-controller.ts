@@ -3,11 +3,13 @@ import {inject, injectable} from 'tsyringe';
 import CreateFieldAdmin from '@/application/use-cases/field/create-field-admin';
 import RegisterUser from '@/application/use-cases/auth/register-user';
 
+import {registerUserInputDto} from '@/infrastructure/dtos/register-user.dto';
 import Controller from '@/infrastructure/decorators/controller.decorator';
-import Post from '@/infrastructure/decorators/post';
+import {Post} from '@/infrastructure/decorators/routes.decorator';
+import {Body} from '@/infrastructure/decorators/parameter.decorator';
 
 import {CREATE_FIELD_ADMIN, REGISTER_USER} from '@/shared/constants/constants';
-import {Body, Params} from '@/infrastructure/decorators/parameter.decorator';
+import Created from '@/infrastructure/success-responses';
 
 @injectable()
 @Controller('/account')
@@ -24,17 +26,9 @@ export default class AccountController {
     };
 
     @Post()
-    async registerUser(@Body('birth') input: registerUserInputDto, @Params() params: any) {
-        return await this._registerUser.execute({...input, birth: new Date(input.birth)});
+    async registerUser(@Body() input: registerUserInputDto) {
+        return new Created(await this._registerUser.execute({...input, birth: new Date(input.birth)}));
     };
 
 }
 
-interface registerUserInputDto {
-    playerName: string;
-    password: string;
-    fullName: string;
-    birth: Date;
-    photo: string;
-    email: string;
-}

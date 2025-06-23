@@ -1,5 +1,5 @@
-import Admin from "@/domain/entities/admin";
+import Admin from '@/domain/entities/admin';
 
 export default interface AdminRepository {
-  findById(id: string): Promise<Admin | null>;
+    findById(id: string): Promise<Admin | null>;
 };

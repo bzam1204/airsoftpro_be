@@ -1,5 +1,5 @@
-import GameStatus from "@/domain/enums/game-status";
-import GameRules from "@/domain/entities/game-rules";
+import GameStatus from '@/domain/enums/game-status';
+import GameRules from '@/domain/entities/game-rules';
 
 export default class Game {
     public static readonly errorCodes = {
@@ -103,7 +103,7 @@ export default class Game {
     };
 
     set playersLimit(playersLimit: number) {
-        this._gameRules.playersLimit = playersLimit
+        this._gameRules.playersLimit = playersLimit;
     };
 
     get playerList() {
@@ -144,7 +144,6 @@ export default class Game {
         this._playerList.push(playerId);
         return void 0;
     };
-
 
     removePlayer(playerId: string): void {
         if (!this._playerList.includes(playerId)) throw new Error(Game.errorCodes.PLAYER_NOT_IN_GAME);

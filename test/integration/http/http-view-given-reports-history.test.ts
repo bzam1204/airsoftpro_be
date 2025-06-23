@@ -15,7 +15,7 @@ describe('Ver Histórico de Denúncias Realizadas por HTTP', function () {
     let app: ExpressAdapter;
 
     beforeAll(function () {
-        app = new ExpressAdapter();
+        app = new ExpressAdapter(container);
         const testContainer = container.createChildContainer();
         testContainer.register(HTTP, {useValue: app});
         const reportsList = new Array(10).fill(null).map((_, i) => new Report({
@@ -41,7 +41,7 @@ describe('Ver Histórico de Denúncias Realizadas por HTTP', function () {
         _container.register(REPORT_REPOSITORY, {
             useValue: new ReportRepositoryMemory([])
         });
-        const _app = new ExpressAdapter();
+        const _app = new ExpressAdapter(_container);
         _container.register(HTTP, {useValue: _app});
         _container.resolve(ReportController);
 

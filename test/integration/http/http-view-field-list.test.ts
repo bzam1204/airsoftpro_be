@@ -16,7 +16,7 @@ describe('Ver Lista de Campos por HTTP', function () {
 
     beforeAll(function () {
         const testContainer = container.createChildContainer();
-        app = new ExpressAdapter();
+        app = new ExpressAdapter(container);
         testContainer.register(HTTP, {useValue: app});
         testContainer.register(FIELD_REPOSITORY, {
             useValue: new FieldRepositoryMemory([
@@ -40,7 +40,7 @@ describe('Ver Lista de Campos por HTTP', function () {
 
     it('Deve retornar lista vazia quando não houver campos', async function () {
         const _container = container.createChildContainer()
-        const _app = new ExpressAdapter();
+        const _app = new ExpressAdapter(_container);
         _container.register(HTTP, {useValue: _app});
         _container.register(FIELD_REPOSITORY, {
             useValue: new FieldRepositoryMemory([])

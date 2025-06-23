@@ -16,7 +16,7 @@ describe('Verificar disponibilidade do nome de jogador por HTTP', function () {
   let app: ExpressAdapter;
 
   beforeAll(function () {
-    app = new ExpressAdapter();
+    app = new ExpressAdapter(container);
     container.register(HTTP, {useValue: app});
     container.register(PLAYER_REPOSITORY, {
       useValue: new PlayerRepositoryMemory([new Player({...playerProps, name: 'used_name'})])

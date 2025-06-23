@@ -12,9 +12,9 @@ describe('Cancelar Jogo por HTTP', function () {
     let app: ExpressAdapter;
 
     beforeAll(function () {
-        app = new ExpressAdapter();
+        app = new ExpressAdapter(container);
         container.register(HTTP, {useValue: app});
-        container.resolve(GameController);
+        app.registerControllers([GameController]);
     });
 
     it('Deve  cancelar um jogo', async function () {

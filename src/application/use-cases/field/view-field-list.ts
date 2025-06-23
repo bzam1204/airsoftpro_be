@@ -1,9 +1,9 @@
-import {inject, injectable} from "tsyringe";
+import {inject, injectable} from 'tsyringe';
 
-import FieldRepository from "@/domain/repositories/field-repository";
-import Field from "@/domain/entities/field";
+import FieldRepository from '@/domain/repositories/field-repository';
+import Field from '@/domain/entities/field';
 
-import {FIELD_REPOSITORY} from "@/shared/constants/constants";
+import {FIELD_REPOSITORY} from '@/shared/constants/constants';
 
 @injectable()
 export default class ViewFieldList {

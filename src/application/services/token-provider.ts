@@ -1,15 +1,15 @@
-import {Payload} from "@/application/use-cases/auth/refresh-token";
+import {Payload} from '@/application/use-cases/auth/refresh-token';
 
 export default interface TokenProvider {
 
-  signRefreshToken(payload: Payload): string;
+    signRefreshToken(payload: Payload): string;
 
-  signAccessToken(payload: Payload): string;
+    signAccessToken(payload: Payload): string;
 
-  verifyAccessToken(token: string): boolean;
+    verifyAccessToken(token: string): boolean;
 
-  verifyRefreshToken(token: string): boolean;
+    verifyRefreshToken(token: string): boolean;
 
-  decode(token: string): Payload;
+    decode(token: string): Payload;
 
 };

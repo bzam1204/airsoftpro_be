@@ -10,7 +10,7 @@ describe('Validar Token por HTTP', function () {
   let app: ExpressAdapter;
 
   beforeAll(function () {
-    app = new ExpressAdapter();
+    app = new ExpressAdapter(container);
     container.register(HTTP, {useValue : app});
     container.register(TOKEN_PROVIDER, {
       useValue : {

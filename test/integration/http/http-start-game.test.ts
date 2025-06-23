@@ -16,12 +16,12 @@ describe('Iniciar Partida por HTTP', function () {
   let app: ExpressAdapter;
 
   beforeAll(function () {
-    app = new ExpressAdapter();
+    app = new ExpressAdapter(container);
     container.register(HTTP, {useValue : app});
 
     const game = new Game({...gameProps, playerList : ['1', '2']});
     container.register(GAME_REPOSITORY, {useValue : new GameRepositoryMemory([game])});
-    container.resolve(GameController);
+    app.registerControllers([GameController]);
   });
 
   it('Deve iniciar uma partida', async function () {

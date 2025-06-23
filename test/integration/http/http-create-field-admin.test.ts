@@ -15,10 +15,10 @@ describe('Criar Administrador de Campo por HTTP', function () {
   let app: ExpressAdapter;
 
   beforeAll(function () {
-    app = new ExpressAdapter();
+    app = new ExpressAdapter(container);
     container.register(HTTP, {useValue : app});
     container.register(USER_REPOSITORY, {useValue : new UserRepositoryMemory([new User({...userProps, id : '1'})])});
-    container.resolve(AccountController);
+    app.registerControllers([AccountController]);
   });
 
   it('Deve adicionar participação', async function () {

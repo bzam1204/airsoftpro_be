@@ -1,18 +1,18 @@
 import bcrypt from 'bcryptjs';
 
-import HashingService from "@/application/services/hashing-service";
-import {injectable} from "tsyringe";
+import HashingService from '@/application/services/hashing-service';
+import {injectable} from 'tsyringe';
 
 @injectable()
 export default class HashingServiceBcryptjs implements HashingService {
-  bcrypt = bcrypt;
+    bcrypt = bcrypt;
 
-  async hash(target: string, saltRounds: number): Promise<string> {
-    return await this.bcrypt.hash(target, saltRounds);
-  };
+    async hash(target: string, saltRounds: number): Promise<string> {
+        return await this.bcrypt.hash(target, saltRounds);
+    };
 
-  async compare(password: string, hash: string): Promise<boolean> {
-      return await this.bcrypt.compare(password, hash);
-  };
-  
+    async compare(password: string, hash: string): Promise<boolean> {
+        return await this.bcrypt.compare(password, hash);
+    };
+
 };

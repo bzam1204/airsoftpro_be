@@ -1,61 +1,61 @@
 export default class Player {
-  private _honorLevel: number;
-  private _tolerance: number;
-  private readonly _userId: string;
-  private readonly motto?: string;
-  private readonly _name: string;
-  private readonly _id: string;
+    private _honorLevel: number;
+    private _tolerance: number;
+    private readonly _userId: string;
+    private readonly motto?: string;
+    private readonly _name: string;
+    private readonly _id: string;
 
-  constructor({honorLevel = 6, tolerance = 10, userId, motto = '', name, id}: Props) {
-    if (honorLevel < 0) throw new Error('HONOR_CANNOT_BE_NEGATIVE');
-    if (tolerance < 0) throw new Error('TOLERANCE_CANNOT_BE_NEGATIVE');
-    this._honorLevel = honorLevel;
-    this._tolerance = tolerance;
-    this._userId = userId;
-    this.motto = motto;
-    this._name = name;
-    this._id = id;
-  };
+    constructor({honorLevel = 6, tolerance = 10, userId, motto = '', name, id}: Props) {
+        if (honorLevel < 0) throw new Error('HONOR_CANNOT_BE_NEGATIVE');
+        if (tolerance < 0) throw new Error('TOLERANCE_CANNOT_BE_NEGATIVE');
+        this._honorLevel = honorLevel;
+        this._tolerance = tolerance;
+        this._userId = userId;
+        this.motto = motto;
+        this._name = name;
+        this._id = id;
+    };
 
-  get honorLevel() {
-    return this._honorLevel;
-  };
+    get honorLevel() {
+        return this._honorLevel;
+    };
 
-  get tolerance() {
-    return this._tolerance;
-  };
-  
-  get userId() {
-    return this._userId;
-  };
-  
-  get name() {
-    return this._name;
-  }
+    get tolerance() {
+        return this._tolerance;
+    };
 
-  get id() {
-    return this._id;
-  };
+    get userId() {
+        return this._userId;
+    };
 
-  private removeHonor() {
-    this._honorLevel -= 1;
-  };
-
-  removeTolerance() {
-    this._tolerance -= 1;
-    if (this._tolerance === 0) {
-      this.removeHonor();
-      this._tolerance = 10;
+    get name() {
+        return this._name;
     }
-  };
+
+    get id() {
+        return this._id;
+    };
+
+    private removeHonor() {
+        this._honorLevel -= 1;
+    };
+
+    removeTolerance() {
+        this._tolerance -= 1;
+        if (this._tolerance === 0) {
+            this.removeHonor();
+            this._tolerance = 10;
+        }
+    };
 
 };
 
 interface Props {
-  honorLevel?: number;
-  tolerance?: number;
-  userId: string;
-  motto?: string;
-  name: string;
-  id: string;
+    honorLevel?: number;
+    tolerance?: number;
+    userId: string;
+    motto?: string;
+    name: string;
+    id: string;
 }

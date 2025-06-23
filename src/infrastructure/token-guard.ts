@@ -1,5 +1,5 @@
-import {CanActivate} from "@/infrastructure/can-activate";
-import ExpressExecutionContext from "@/infrastructure/express-execution-context";
+import {CanActivate} from '@/infrastructure/can-activate';
+import ExpressExecutionContext from '@/infrastructure/express-execution-context';
 
 export default class TokenGuard implements CanActivate {
 

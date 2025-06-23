@@ -1,3 +1,3 @@
-import {CanActivate} from "@/infrastructure/can-activate";
+import {CanActivate} from '@/infrastructure/can-activate';
 
-export type CanActivateClass = { new(...args: any[]): CanActivate };
+export type CanActivateClass = {new(...args: any[]): CanActivate};
