@@ -25,7 +25,7 @@ describe('Cancelar Jogo por HTTP', function () {
             .expect(200)
             .expect(res => {
                 //TODO: mapear dtos de saida para evitar usar atributos privados
-                expect(res.body.game._status).toBe(GameStatus.CANCELLED);
+                expect(res.body.data.game._status).toBe(GameStatus.CANCELLED);
             });
     });
 

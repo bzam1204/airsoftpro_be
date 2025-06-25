@@ -29,7 +29,7 @@ describe('Criar Administrador de Campo por HTTP', function () {
         .expect(200)
         .expect(res => {
           //TODO: mapear dtos de saida para evitar usar atributos privados
-          expect(res.body.fieldAdmin._userId).toBe('1');
+          expect(res.body.data.fieldAdmin._userId).toBe('1');
         });
   });
 

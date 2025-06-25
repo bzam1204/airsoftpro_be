@@ -27,7 +27,7 @@ describe('Registrar Usuario por HTTP', function () {
         await request(app.getInstance())
             .post('/account')
             .send(userData)
-            .expect(200)
+            .expect(201)
             .expect(res => {
                 const data = res.body.data;
                 expect(data.user).toBeDefined();

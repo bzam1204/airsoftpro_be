@@ -32,7 +32,7 @@ describe('Criar Partida por HTTP', function () {
             .send(data)
             .expect(200)
             .expect(res => {
-                expect(res.body.game).toBeDefined();
+                expect(res.body.data.game).toBeDefined();
             });
     });
 

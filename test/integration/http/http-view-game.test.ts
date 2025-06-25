@@ -20,7 +20,7 @@ describe('Ver uma Partida por HTTP', function () {
             .get('/game/1')
             .expect(200)
             .expect(res => {
-                expect(res.body.game).toBeDefined();
+                expect(res.body.data.game).toBeDefined();
             });
     });
 

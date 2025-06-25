@@ -34,8 +34,9 @@ describe('Entrar na Partida por HTTP', function () {
             .send({playerId: '1'})
             .expect(200)
             .expect(res => {
-                expect(res.body.game._playerList).toContain('1');
-                expect(res.body.game).toBeDefined();
+                const game = res.body.data.game;
+                expect(game._playerList).toContain('1');
+                expect(game).toBeDefined();
             });
     });
 

@@ -55,7 +55,7 @@ export default class ExpressAdapter implements Http {
                 };
                 const parameterValues: any[] = this.getRouteParameters(parameterDefinitionsList, httpRequest);
                 const output: SuccessResponse = await handler(...parameterValues);
-                response.status(output.code ?? 200).json(output.data ?? {data: output});
+                response.status(output.code ?? 200).json({data: output.data ?? output});
             } catch (error) {
                 next(error);
             }

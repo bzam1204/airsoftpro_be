@@ -27,9 +27,9 @@ describe('Criar Usuário por HTTP', function () {
     await request(app.getInstance())
         .post('/account')
         .send(data)
-        .expect(200)
+        .expect(201)
         .expect(res => {
-          expect(res.body.user).toBeDefined();
+          expect(res.body.data.user).toBeDefined();
         });
   });
 

@@ -30,7 +30,7 @@ describe('Finalizar Partida por HTTP', function () {
             .send({})
             .expect(200)
             .expect(res => {
-                expect(res.body.game).toBeDefined();
+                expect(res.body.data.game).toBeDefined();
             });
     });
 

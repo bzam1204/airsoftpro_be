@@ -29,8 +29,9 @@ describe('Ver Lista de Partidas por HTTP', function () {
             .get('/game')
             .expect(200)
             .expect(res => {
-                expect(res.body.games).toBeDefined();
-                expect(res.body.games.length).toBe(3);
+                const games = res.body.data.games;
+                expect(games).toBeDefined();
+                expect(games.length).toBe(3);
             });
     });
 
@@ -46,8 +47,9 @@ describe('Ver Lista de Partidas por HTTP', function () {
             .get('/game')
             .expect(200)
             .expect(res => {
-                expect(res.body.games).toBeDefined();
-                expect(res.body.games.length).toBe(0);
+                const games = res.body.data.games;
+                expect(games).toBeDefined();
+                expect(games.length).toBe(0);
             });
     });
 

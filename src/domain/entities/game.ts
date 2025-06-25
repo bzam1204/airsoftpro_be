@@ -1,5 +1,6 @@
 import GameStatus from '@/domain/enums/game-status';
 import GameRules from '@/domain/entities/game-rules';
+import {DomainException} from '@/application/error-patterns';
 
 export default class Game {
     public static readonly errorCodes = {
@@ -152,7 +153,7 @@ export default class Game {
     };
 
     finish(): void {
-        if (!this.isGameStarted()) throw new Error(Game.errorCodes.GAME_NOT_IN_PROGRESS);
+        if (!this.isGameStarted()) throw new DomainException(Game.errorCodes.GAME_NOT_IN_PROGRESS);
         this._status = GameStatus.FINISHED;
         this._finishDate = new Date();
         return void 0;
