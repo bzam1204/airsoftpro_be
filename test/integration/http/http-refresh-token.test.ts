@@ -19,7 +19,7 @@ describe('Renovar Token por HTTP', function () {
         decode : () => ({sub: '1', email: ''}),
       }});
     container.register(VALIDATE_TOKEN, {useValue: {execute: () => Promise.resolve(true)}});
-    container.resolve(AuthController);
+    app.registerControllers([AuthController]);
   });
 
   it('Deve renovar o token', async function () {
@@ -29,8 +29,8 @@ describe('Renovar Token por HTTP', function () {
         .send(requestData)
         .expect(200)
         .expect(res => {
-          expect(res.body.accessToken).toBe('123123');
-          expect(res.body.refreshToken).toBe('321321');
+          expect(res.body.data.accessToken).toBe('123123');
+          expect(res.body.data.refreshToken).toBe('321321');
         });
   });
 

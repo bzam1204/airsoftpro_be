@@ -3,7 +3,7 @@ POST http://localhost:3000/auth/refresh-token
 Content-Type: application/json
 
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjUyZDNjMS00NjIzLTQwOTItOWM0MS05YzJiZjI1NGQyMTIiLCJlbWFpbCI6ImdhYnlAYWlyc29mdHByby5jb20iLCJwbGF5ZXJOYW1lIjoiZ2FieWx1ZG8iLCJyb2xlcyI6WyJQTEFZRVIiXSwiaWF0IjoxNzQ5MjYxNTI3LCJleHAiOjE3NDk4NjYzMjd9.LH81YFGCn0-G5lsf9G1b1eoxWu0XUPV9NQiOtlIKYWQ"
+  "token": "{\"sub\":\"e8949779-2af0-46b8-87fd-f9114ce223de\",\"email\":\"gaby@airsoftpro.com\",\"playerName\":\"gabyludo\",\"roles\":[\"PLAYER\"],\"code\":\"321\"}"
 }
 
 ###

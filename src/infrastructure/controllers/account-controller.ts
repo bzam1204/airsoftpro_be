@@ -5,11 +5,11 @@ import RegisterUser from '@/application/use-cases/auth/register-user';
 
 import {registerUserInputDto} from '@/infrastructure/dtos/register-user.dto';
 import Controller from '@/infrastructure/decorators/controller.decorator';
+import Created from '@/infrastructure/success-responses';
 import {Post} from '@/infrastructure/decorators/routes.decorator';
 import {Body} from '@/infrastructure/decorators/parameter.decorator';
 
 import {CREATE_FIELD_ADMIN, REGISTER_USER} from '@/shared/constants/constants';
-import Created from '@/infrastructure/success-responses';
 
 @injectable()
 @Controller('/account')

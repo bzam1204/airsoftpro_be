@@ -21,7 +21,7 @@ describe('Validar Token por HTTP', function () {
         decode : jest.fn(),
       }
     });
-    container.resolve(AuthController);
+    app.registerControllers([AuthController]);
   });
 
   it('Deve validar um token válido', async function () {
@@ -30,7 +30,7 @@ describe('Validar Token por HTTP', function () {
         .send({token: 'valid_token'})
         .expect(200)
         .expect(res => {
-          expect(res.body.valid).toBe(true);
+          expect(res.body.data.valid).toBe(true);
         });
   });
 
@@ -40,7 +40,7 @@ describe('Validar Token por HTTP', function () {
         .send({token: 'invalid_token'})
         .expect(200)
         .expect(res => {
-          expect(res.body.valid).toBe(false);
+          expect(res.body.data.valid).toBe(false);
         });
   });
 });
